@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://jqj2wrorbo4b"]
+
+[ext_resource type="Texture2D" uid="uid://cw75wvhk33vd5" path="res://assets/cursor.png" id="1_ckna7"]
+[ext_resource type="Script" path="res://src/cursor.gd" id="1_q3p7f"]
+
+[node name="Cursor" type="Node2D"]
+script = ExtResource("1_q3p7f")
+
+[node name="sprite" type="Sprite2D" parent="."]
+
+[node name="spriteR" type="Sprite2D" parent="sprite"]
+texture = ExtResource("1_ckna7")
+centered = false
+
+[node name="spriteL" type="Sprite2D" parent="sprite"]
+texture = ExtResource("1_ckna7")
+centered = false
+offset = Vector2(32, 0)

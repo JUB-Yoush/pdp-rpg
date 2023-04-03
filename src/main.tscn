@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://cbr43wtljdedr"]
+[gd_scene load_steps=3 format=3 uid="uid://cbr43wtljdedr"]
+
+[ext_resource type="Script" path="res://src/Grid.gd" id="1_el8yy"]
+[ext_resource type="PackedScene" uid="uid://jqj2wrorbo4b" path="res://src/cursor.tscn" id="2_xcltg"]
 
 [node name="Main" type="Node2D"]
+
+[node name="Grid" type="Node2D" parent="."]
+script = ExtResource("1_el8yy")
+
+[node name="Cursor" parent="." instance=ExtResource("2_xcltg")]
