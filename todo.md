@@ -9,6 +9,10 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 
 now what:
 - design the different kinds of blocks there will be/whole battle system (PUSH AND PULL JAYDEN)
-- work on spawning different kinds of blocks and from the bottom ()
+- work on spawning different kinds of blocks and from the bottom 
 - consdier simplyfing the grid? it's a smaller-scale version of the game considering all the rpg stuff
+- design the rpg systems
+  - monsters
+  - skills
+  - monsters drop essence on death you can feed to other monsters
 
