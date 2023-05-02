@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 	elif event.is_action_pressed("right"):
 		input_dir = Vector2i.RIGHT
 		move(input_dir)
-	
+
 	if event.is_action_pressed("accept"):
 		print(grid_position)
 		grid.swap_pieces(grid_position)
