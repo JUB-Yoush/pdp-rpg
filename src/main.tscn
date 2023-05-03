@@ -5,8 +5,10 @@
 [ext_resource type="Texture2D" uid="uid://cfc1c61v7avv" path="res://assets/block-5.png" id="3_p532n"]
 
 [node name="Main" type="Node2D"]
+metadata/_edit_vertical_guides_ = [322.0]
 
 [node name="TextureRect" type="TextureRect" parent="."]
+visible = false
 offset_right = 1294.0
 offset_bottom = 733.0
 texture = ExtResource("3_p532n")
@@ -14,6 +16,7 @@ stretch_mode = 1
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource("1_el8yy")
+starting_row_count = 4
 
 [node name="Cursor" parent="." instance=ExtResource("2_xcltg")]
 

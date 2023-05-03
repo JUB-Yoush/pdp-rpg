@@ -1,41 +1,47 @@
 extends Node2D
 
-var width = 6
-var height = 12
-var x_start = 300
-var y_start = 32 * 14
-var offset = 32
+const width = 6
+const height = 12
+var x_start:int 
+var y_start:int
+var offset = 24
 var PieceScene = preload("res://src/piece.tscn")
 
 enum TYPE {RE,BL,GR,YE,PU,EM}
 var colour_count := 5
 # STORES IN Y,X FORMAT
 var grid_array := [] # grid in array form
-
+@export_range(0,height) var starting_row_count:int  
 var destroyTimer:Timer #timers for animation delays
 var collapseTimer:Timer
-
 var sidedrop_delay = .1 #animation delays
 var cleardrop_delay = .3
 
 func _ready() -> void:
+	x_start = get_viewport_rect().size.x/2 - (offset * width/2)
+	y_start = offset * (height + 2) 
 	seed(4)
 	#randomize()
 	destroyTimer = get_parent().get_node("DestoryTimer")
 	collapseTimer = get_parent().get_node("CollapseTimer")
 
-	grid_array = make_2d_array()
-	fill_grid()
+	grid_array = make_grid_array()
+	start_grid()
+	add_rows(starting_row_count)
 	destroyTimer.timeout.connect(destroy_matches)
 	collapseTimer.timeout.connect(collapse_colums)
 
-func make_2d_array():
+func make_grid_array():
 	var grid_array = []
 	for i in width:
 		grid_array.append([])
 		for j in height:
 			grid_array[i].append(null)
 	return grid_array
+
+func start_grid():
+	call_every_pos(change_to_empty)
+
 
 func make_piece(type_int:int) -> Piece:
 	var new_piece :Piece = PieceScene.instantiate()
@@ -69,10 +75,34 @@ func rng_piece(i,j):
 func fill_grid():
 	call_every_pos(rng_piece)
 
+func add_rows(new_rows:int):
+	#repeat for number of rows added
+	for x in range(new_rows):
+	#check that there is space on that row (keep a 1d array with the higest not empty piece on each column)
+		for col in width:
+			var currRow = 0
+			while !grid_array[col][currRow].empty:
+				currRow += 1
+				#if currRow == height:  # if you topped out leave function
+					#topout()
+					#return
+			#if currRow < height:
+			#move every other piece on row up by one
+			for i in range(currRow,0,-1):
+				drop_piece(col,i,i-1)
+			rng_piece(col,0)
+			destroy_matches()
+				
+
+
+	#add new piece at bottom
+	pass
+
+
 func change_to_empty(col:int,row:int):
 	#change a piece at a positions to an empty piece
 	var new_empty := make_empty_piece()
-	grid_array[col][row].queue_free()
+	if grid_array[col][row] != null: grid_array[col][row].queue_free()
 	grid_array[col][row] = new_empty
 	add_child(new_empty)
 	new_empty.position = grid_to_pixel(col,row)
@@ -100,7 +130,6 @@ func swap_pieces(cursor_pos):
 
 		valueL.move(grid_to_pixel(cursor_pos.x+1,cursor_pos.y))
 		valueR.move(grid_to_pixel(cursor_pos.x,cursor_pos.y))
-		find_matches()
 		collapseTimer.start(sidedrop_delay)
 
 func drop_piece(col:int,dropRow:int,emptyRow:int):
@@ -108,7 +137,6 @@ func drop_piece(col:int,dropRow:int,emptyRow:int):
 	var valueU :Piece= grid_array[col][dropRow]
 	var valueD :Piece= grid_array[col][emptyRow]
 
-	prints("droprow",dropRow,"emptyRow",emptyRow)
 	var temp:Piece = grid_array[col][emptyRow]
 	grid_array[col][emptyRow] = grid_array[col][dropRow]
 	grid_array[col][dropRow] = temp
@@ -117,7 +145,8 @@ func drop_piece(col:int,dropRow:int,emptyRow:int):
 	valueU.move(grid_to_pixel(col,emptyRow))
 
 
-
+func topout():
+	print("you should be dead! now!")
 
 
 func find_matches():
@@ -179,6 +208,10 @@ func collapse_colums():
 	)
 	find_matches()
 	
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("row_add"):
+		add_rows(1)
 
 #func collapse_colum(i,j):
 	## check if current piece is empty and if any above it are NOT empty
