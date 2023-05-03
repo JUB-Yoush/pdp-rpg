@@ -35,6 +35,13 @@ now what:
   - Def
   - Skills (same system as PCs, just make sure you stipulate who's using it)
 
+resources:
+- generic actions
+- attack actions
+- other actions
+- hit event
+
+
 the battle system:
 kinds of pieces:
 - generic skill/action points
