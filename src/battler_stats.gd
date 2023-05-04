@@ -7,6 +7,11 @@ signal health_changed(old_value,new_value)
 
 var max_health := 20
 
+# An array of elements against which the battler is weak.
+# These weaknesses should be values from our `Types.Elements` enum.
+@export var weaknesses := []
+# The battler's elemental affinity. Gives bonuses with related actions.
+@export var affinity = Types.Elements
 var health := max_health:
     set(new_value):
         var old_health := health
@@ -38,7 +43,56 @@ var health := max_health:
     get:
             return base_defence
 
+@export var base_hit_chance := 10:
+    set(new_value):
+            base_speed = new_value
+            _recalculate_and_update("hit_chance")
+    get:
+            return base_defence
+
+@export var base_evasion := 10:
+    set(new_value):
+            base_speed = new_value
+            _recalculate_and_update("evasion")
+    get:
+            return base_defence
+
+
+const UPGRADABLE_STATS :Array[String]= ["max_health","max_energy","attack",
+"defence","speed","hit_chance","evasion"]
+
+var _modifiers := {}
+func _init() -> void:
+        for stat in UPGRADABLE_STATS:
+                _modifiers[stat] = {}
 
 func _recalculate_and_update(stat:String):
-    pass
+        var value: float = get("base_" + stat)
+        var modifiers: Array = _modifiers[stat].values()
+        for modifier in modifiers:
+                value += modifier
+        value = max(value,0.0)
+        set(stat,value)
 
+# add a modifier to a stat (an positive or negative value that get's consdiered in it's final version)
+func add_modifier(stat_name:String,value:float) -> int:
+        assert(stat_name in UPGRADABLE_STATS, "Trying to add a modifier to a nonexistent stat.")
+        var id:= _generate_unique_id(stat_name)
+        _modifiers[stat_name][id] = value
+        _recalculate_and_update(stat_name)
+        return id
+
+func remove_modifier(stat_name:String,id:int)-> void:
+        assert(id in _modifiers[stat_name], "Id %s not found in %s" % [id, _modifiers[stat_name]])
+        _modifiers[stat_name].erase(id)
+        _recalculate_and_update(stat_name)
+        
+
+# make id for a stat modifier 
+func _generate_unique_id(stat_name:String) -> int:
+        var keys:Array = _modifiers[stat_name].keys()
+        # start at 0 overwise start at the most recent value
+        if keys.is_empty():
+                return 0
+        else:
+                return keys.back() + 1

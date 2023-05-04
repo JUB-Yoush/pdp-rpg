@@ -31,5 +31,5 @@ func _ready():
     stats = stats.duplicate()
 
 func _on_BattlerStats_health_depleted():
-    #set_is_active(false)
+#    set_is_active(false)
     if not is_party_member: is_selectable = false
