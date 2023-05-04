@@ -1,3 +1,11 @@
-[gd_scene format=3 uid="uid://eiiqs2j1lwt1"]
+[gd_scene load_steps=2 format=3 uid="uid://eiiqs2j1lwt1"]
+
+[ext_resource type="PackedScene" uid="uid://cg3auami8t1l7" path="res://src/battler.tscn" id="1_fxkk1"]
 
 [node name="CombatDemo" type="Node2D"]
+
+[node name="Battlers" type="Node2D" parent="."]
+
+[node name="PlayerBattler" parent="Battlers" instance=ExtResource("1_fxkk1")]
+
+[node name="EnemyBattler" parent="Battlers" instance=ExtResource("1_fxkk1")]

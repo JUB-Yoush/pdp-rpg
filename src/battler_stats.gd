@@ -5,7 +5,7 @@ signal health_depleted
 signal health_changed(old_value,new_value)
 
 
-var max_health := 20
+@export var max_health := 20
 
 # An array of elements against which the battler is weak.
 # These weaknesses should be values from our `Types.Elements` enum.

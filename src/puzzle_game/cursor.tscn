@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1j26omn5kpo3"]
+
+[ext_resource type="Script" path="res://src/puzzle_game/cursor.gd" id="1_0yiso"]
+[ext_resource type="Texture2D" uid="uid://cw75wvhk33vd5" path="res://assets/cursor.png" id="2_f8bm1"]
+
+[node name="Cursor" type="Node2D"]
+script = ExtResource("1_0yiso")
+
+[node name="sprite" type="Sprite2D" parent="."]
+
+[node name="spriteR" type="Sprite2D" parent="sprite"]
+texture = ExtResource("2_f8bm1")
+centered = false
+
+[node name="spriteL" type="Sprite2D" parent="sprite"]
+position = Vector2(-8, 0)
+texture = ExtResource("2_f8bm1")
+centered = false
+offset = Vector2(32, 0)

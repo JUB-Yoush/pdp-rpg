@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cbr43wtljdedr"]
+[gd_scene load_steps=4 format=3]
 
-[ext_resource type="Script" path="res://src/Grid.gd" id="1_el8yy"]
-[ext_resource type="PackedScene" uid="uid://jqj2wrorbo4b" path="res://src/cursor.tscn" id="2_xcltg"]
+[ext_resource type="Script" path="res://src/puzzle_game/Grid.gd" id="1_el8yy"]
+[ext_resource type="PackedScene" uid="uid://jqj2wrorbo4b" path="res://src/puzzle_game/cursor.tscn" id="2_xcltg"]
 [ext_resource type="Texture2D" uid="uid://cfc1c61v7avv" path="res://assets/block-5.png" id="3_p532n"]
 
 [node name="Main" type="Node2D"]

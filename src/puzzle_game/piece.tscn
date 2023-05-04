@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c35yb1vgc2p2t"]
+[gd_scene load_steps=3 format=3]
 
-[ext_resource type="Script" path="res://src/piece.gd" id="1_ltn8u"]
+[ext_resource type="Script" path="res://src/puzzle_game/piece.gd" id="1_ltn8u"]
 [ext_resource type="Texture2D" uid="uid://bji1qdrlnavp1" path="res://assets/block-1.png" id="2_dfihl"]
 
 [node name="Piece" type="Node2D"]

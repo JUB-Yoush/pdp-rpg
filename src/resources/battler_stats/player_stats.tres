@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="BattlerStats" load_steps=2 format=3 uid="uid://btvq1swi64rqh"]
+
+[ext_resource type="Script" path="res://src/battler_stats.gd" id="1_c02hy"]
+
+[resource]
+script = ExtResource("1_c02hy")
+max_health = 20
+weaknesses = []
+affinity = {
+"NONE": 0,
+"PAPER": 2,
+"ROCK": 1,
+"SCISSORS": 3
+}
+base_attack = 12
+base_defence = 3
+base_speed = 55
+base_hit_chance = 100
+base_evasion = 10
