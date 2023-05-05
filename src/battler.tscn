@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cg3auami8t1l7"]
-
-[ext_resource type="Script" path="res://src/battler.gd" id="1_a4rll"]
-
-[node name="Battler" type="Node2D"]
-script = ExtResource("1_a4rll")

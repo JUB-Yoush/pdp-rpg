@@ -1,5 +1,6 @@
 how does one make a panel de pon (at least the mechanics needed for my game)
 - ~~generating 2d array of piece scenes~~
+- 
 - ~~generating without existing matches ~~
 - ~~moving cursor around~~
 - ~~swaping blocks at cursor (make sure blocks can swap with nothing and if nothing is under them post swap then they fall)~~
@@ -7,44 +8,18 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 - ~~remove cleared blocks, move others down~~
 - ~~move other blocks down~~
 
-now what:
+### now what:
 - ~~design the different kinds of blocks there will be/whole battle system (PUSH AND PULL JAYDEN)~~
 - ~~work on spawning different kinds of blocks and from the bottom~~ 
-- make some sample data and a simple ui to interact with the systems with
-- make sure there are no holes in the RPG system then work on going back and forth from pdp to the rpg
 
+- use hard coded interactions to make sure rpg systems work
+- go one layer out and think about how players and enemies will notify the manager that it's thier turn
+  - party: it's an array we go though (all party members act at the same time)
+  - enemies: notified by purple blocks counting down
+  - make the ui/ai systems that let partymems and enemies pick actions
 
-
-- design the rpg systems
-  - party member stats:
-	- Name
-	- member id
-	- HP (when it hits 0 you ded)
-	- Atk (added to attacks dealt)
-	- Def (subtracted from damage taken)
-	- skills (array of skills they have)
-  
-  skill stats:
-  - id
-  - name
-  - passive or active
-  - cost to use
-  - targets (self or enemies)
-  - effect
-
-  enemy stats:
-  - name
-  - id
-  - HP
-  - Attack
-  - Def
-  - Skills (same system as PCs, just make sure you stipulate who's using it)
-
-resources:
-- generic actions
-- attack actions
-- other actions
-- hit event
+- make more than just attackActions (figure out how to differetntiate them)
+- add stat modifing actions (figure out a turn time limit system)
 
 
 the battle system:

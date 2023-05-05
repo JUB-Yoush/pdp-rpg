@@ -1,6 +1,6 @@
 extends Node2D
 class_name Piece
-enum TYPE {RE,BL,GR,YE,PU,EM}
+enum TYPE {RE,BL,GR,YE,EM}
 var empty:bool 
 var type:int
 var swap_anim_time:float = .1
@@ -32,3 +32,5 @@ func move(new_pos:Vector2):
 
 func dim():
 	sprite.modulate = Color(1,1,1,.5)
+
+		

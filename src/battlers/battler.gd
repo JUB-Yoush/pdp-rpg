@@ -1,7 +1,7 @@
 extends Node2D
 class_name Battler
 
-@export var stats:Resource
+@export var stats:BattlerStats
 @export var ai_scene :PackedScene
 @export var actions:Array[ActionData]
 @export var is_party_member:= true
@@ -14,9 +14,11 @@ signal action_finished
 signal hit_missed
 
 func take_hit(hit:Hit)-> void:
+	print("taking hit")
 	if hit.does_hit():
 		_take_damage(hit.damage)
 	else:
+		print("missed")
 		hit_missed.emit()
 
 var is_selected := false: 
@@ -35,11 +37,11 @@ var is_selectable := true:
 
 func is_player_controlled() -> bool:
 	return ai_scene == null
-    
+	
 func _ready():
 	assert(stats is BattlerStats)
 	stats = stats.duplicate()
-    #stats.reinitalize()
+	#stats.reinitalize()
 	stats.health_depleted.connect(_on_BattlerStats_health_depleted)
 
 func _on_BattlerStats_health_depleted():
@@ -48,9 +50,14 @@ func _on_BattlerStats_health_depleted():
 
 func _take_damage(amount:int) -> void:
 	stats.health -= amount
+	prints("took",amount,"damage, health is now",stats.health)
 
 func act(action:Action) -> void:
-	stats.energy -= action.get_energy_cost()
+	#if not is_player_controlled():
+		##skip checking energy
+
+	#energy won't be stored in indivisual party members
+	##stats.energy -= action.get_energy_cost()
 	await action.apply_async()
 	#if is_active: 
 		#set_process(true)

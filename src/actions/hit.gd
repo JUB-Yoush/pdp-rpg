@@ -13,4 +13,5 @@ func _init(_damage: int, _hit_chance := 100.0) -> void:
 
 # Returns true if the hit isn't missing. To use when consuming the hit.
 func does_hit() -> bool:
+    prints(hit_chance,randf() * 100.0)
     return randf() * 100.0 < hit_chance

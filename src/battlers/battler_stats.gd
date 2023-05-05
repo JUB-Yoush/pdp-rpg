@@ -9,9 +9,10 @@ signal health_changed(old_value,new_value)
 
 # An array of elements against which the battler is weak.
 # These weaknesses should be values from our `Types.Elements` enum.
+@export var name:String
 @export var weaknesses := []
 # The battler's elemental affinity. Gives bonuses with related actions.
-@export var affinity = Types.Elements
+@export var affinity = Types.Elements.NONE
 
 var health := max_health:
     set(new_value):
@@ -42,21 +43,27 @@ var health := max_health:
             base_speed = new_value
             _recalculate_and_update("speed")
     get:
-            return base_defence
+            return base_speed
 
 @export var base_hit_chance := 10:
     set(new_value):
-            base_speed = new_value
+            base_hit_chance = new_value
             _recalculate_and_update("hit_chance")
     get:
-            return base_defence
+            return base_hit_chance
 
 @export var base_evasion := 10:
     set(new_value):
-            base_speed = new_value
+            base_evasion = new_value
             _recalculate_and_update("evasion")
     get:
-            return base_defence
+            return base_evasion
+
+var attack := base_attack
+var defence := base_defence
+var speed := base_speed
+var hit_chance := base_hit_chance
+var evasion := base_evasion
 
 
 const UPGRADABLE_STATS :Array[String]= ["max_health","max_energy","attack",

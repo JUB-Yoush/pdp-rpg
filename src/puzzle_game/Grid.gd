@@ -7,8 +7,8 @@ var y_start:int
 var offset = 24
 var PieceScene = preload("res://src/puzzle_game/piece.tscn")
 
-enum TYPE {RE,BL,GR,YE,PU,EM}
-var colour_count := 5
+enum TYPE {RE,BL,GR,YE,EM}
+var colour_count := TYPE.values().size() -1
 # STORES IN Y,X FORMAT
 var grid_array := [] # grid in array form
 @export_range(0,height) var starting_row_count:int  
@@ -16,6 +16,7 @@ var destroyTimer:Timer #timers for animation delays
 var collapseTimer:Timer
 var sidedrop_delay = .1 #animation delays
 var cleardrop_delay = .3
+
 
 func _ready() -> void:
 	x_start = get_viewport_rect().size.x/2 - (offset * width/2)
