@@ -12,6 +12,7 @@ signal health_changed(old_value,new_value)
 @export var weaknesses := []
 # The battler's elemental affinity. Gives bonuses with related actions.
 @export var affinity = Types.Elements
+
 var health := max_health:
     set(new_value):
         var old_health := health

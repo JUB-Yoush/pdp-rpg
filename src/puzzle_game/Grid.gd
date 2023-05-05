@@ -5,7 +5,7 @@ const height = 12
 var x_start:int 
 var y_start:int
 var offset = 24
-var PieceScene = preload("res://src/piece.tscn")
+var PieceScene = preload("res://src/puzzle_game/piece.tscn")
 
 enum TYPE {RE,BL,GR,YE,PU,EM}
 var colour_count := 5

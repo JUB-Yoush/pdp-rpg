@@ -1,11 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://eiiqs2j1lwt1"]
+[gd_scene load_steps=7 format=3 uid="uid://eiiqs2j1lwt1"]
 
-[ext_resource type="PackedScene" uid="uid://cg3auami8t1l7" path="res://src/battler.tscn" id="1_fxkk1"]
+[ext_resource type="Script" path="res://src/battler.gd" id="1_dvmy5"]
+[ext_resource type="Script" path="res://src/combat_manager.gd" id="1_fjji6"]
+[ext_resource type="Resource" uid="uid://btvq1swi64rqh" path="res://src/resources/battler_stats/player_stats.tres" id="2_lkwfx"]
+[ext_resource type="Resource" uid="uid://dyttcbf06i1dt" path="res://src/resources/battler_stats/enemy_stats.tres" id="3_1fto6"]
+[ext_resource type="Resource" uid="uid://vwqrgxwju1f3" path="res://src/resources/attack_actions/basic_attack.tres" id="4_u0rje"]
+[ext_resource type="PackedScene" uid="uid://dnr8ns7dtkp5w" path="res://src/PuzzleGame.tscn" id="6_p00x7"]
 
 [node name="CombatDemo" type="Node2D"]
 
-[node name="Battlers" type="Node2D" parent="."]
+[node name="CombatManager" type="Node2D" parent="."]
+script = ExtResource("1_fjji6")
 
-[node name="PlayerBattler" parent="Battlers" instance=ExtResource("1_fxkk1")]
+[node name="PlayerBattler" type="Node2D" parent="CombatManager"]
+script = ExtResource("1_dvmy5")
+stats = ExtResource("2_lkwfx")
+actions = Array[Resource("res://src/action_data.gd")]([ExtResource("4_u0rje")])
 
-[node name="EnemyBattler" parent="Battlers" instance=ExtResource("1_fxkk1")]
+[node name="Enemies" type="Node2D" parent="CombatManager"]
+
+[node name="EnemyBattler" type="Node2D" parent="CombatManager/Enemies"]
+script = ExtResource("1_dvmy5")
+stats = ExtResource("3_1fto6")
+actions = Array[Resource("res://src/action_data.gd")]([ExtResource("4_u0rje")])
+
+[node name="PuzzleGame" parent="." instance=ExtResource("6_p00x7")]
+visible = true

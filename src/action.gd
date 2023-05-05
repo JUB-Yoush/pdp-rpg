@@ -17,8 +17,9 @@ func _init(data:ActionData,actor,targets:Array) -> void:
 # Notice that the function's name includes the suffix "async".
 # This indicates the function should be a coroutine (it should use yield()).
 # That's because in our case, finishing an action involves animation.
+
 func apply_async() -> bool:
-    await Engine.get_main_loop().idle_frame
+    await Engine.get_main_loop().process_frame
     finished.emit()
     return true
 
@@ -28,3 +29,5 @@ func targets_opponents() -> bool:
 
 func get_energy_cost() -> int:
     return _data.energy_cost
+
+

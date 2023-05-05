@@ -10,6 +10,11 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 now what:
 - ~~design the different kinds of blocks there will be/whole battle system (PUSH AND PULL JAYDEN)~~
 - ~~work on spawning different kinds of blocks and from the bottom~~ 
+- make some sample data and a simple ui to interact with the systems with
+- make sure there are no holes in the RPG system then work on going back and forth from pdp to the rpg
+
+
+
 - design the rpg systems
   - party member stats:
 	- Name

@@ -2,7 +2,7 @@ class_name ActionData
 extends Resource
 
 enum Elements {NONE,ROCK,PAPER,SCISSORS}
-enum ActionType {ACTIVE,PASSIVE}
+enum ActionType {RED,GREEN}
 
 @export var icon: Texture
 @export var label: = "combat action placeholder text"
@@ -11,6 +11,7 @@ enum ActionType {ACTIVE,PASSIVE}
 
 @export var element: Elements
 
+#green or red action
 @export var action_type:ActionType
 
 @export var is_targeting_self := false
