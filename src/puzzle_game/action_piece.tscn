@@ -1,8 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cka4wp2vo8kpg"]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="PackedScene" uid="uid://dgmin6udgpvla" path="res://src/puzzle_game/piece.tscn" id="1_q1546"]
 [ext_resource type="Script" path="res://src/puzzle_game/action_piece.gd" id="2_w8aml"]
-[ext_resource type="Texture2D" uid="uid://dft1i0bxdpgcw" path="res://assets/block-action.png" id="3_h3iih"]
+[ext_resource type="Texture2D" uid="uid://dft1i0bxdpgcw" path="res://assets/block-4.png" id="3_h3iih"]
 [ext_resource type="FontFile" uid="uid://t0ckvlv6kh50" path="res://assets/fonts/Awe Mono Gold.ttf" id="4_8cn8s"]
 
 [node name="ActionPiece" instance=ExtResource("1_q1546")]

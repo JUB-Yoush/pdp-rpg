@@ -1,7 +1,8 @@
 extends Node2D
 class_name Piece
-enum TYPE {RE,BL,GR,YE,EM}
+enum TYPE {RE,BL,GR,YE,PR,EM}
 var empty:bool 
+var is_action_piece:bool = false
 var type:int
 var swap_anim_time:float = .1
 var can_swap:bool = true

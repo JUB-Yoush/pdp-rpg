@@ -7,7 +7,7 @@ var y_start:int
 var offset = 24
 var PieceScene = preload("res://src/puzzle_game/piece.tscn")
 
-enum TYPE {RE,BL,GR,YE,EM}
+enum TYPE {RE,BL,GR,YE,PR,EM}
 var colour_count := TYPE.values().size() -1
 # STORES IN Y,X FORMAT
 var grid_array := [] # grid in array form
@@ -50,6 +50,11 @@ func make_piece(type_int:int) -> Piece:
 	new_piece.empty = false
 	return new_piece
 
+func make_action_piece(type_int:int) -> Piece:
+	var new_piece :Piece = PieceScene.instantiate()
+	new_piece.empty = false
+	return new_piece
+
 func make_empty_piece() -> Piece:
 	var new_piece :Piece = PieceScene.instantiate()
 	new_piece.type = TYPE.EM
@@ -63,10 +68,10 @@ func grid_to_pixel(column,row):
 
 func rng_piece(i,j):
 	var tries := 0
-	var rng = randi_range(0,colour_count -1)
+	var rng = randi_range(0,colour_count -2)
 	var newPiece = make_piece(rng)
 	while(match_at(i,j,rng) and tries < 100):
-		rng = randi_range(0,colour_count -1)
+		rng = randi_range(0,colour_count -2)
 		tries += 1
 		newPiece = make_piece(rng)
 	add_child(newPiece)
