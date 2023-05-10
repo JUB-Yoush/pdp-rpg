@@ -3,10 +3,10 @@ class_name Action
 signal finished
 
 var _data
-var _actor
+var _actor:Battler
 var _targets := []
 
-func _init(data:ActionData,actor,targets:Array) -> void:
+func _init(data:ActionData,actor:Battler,targets) -> void:
     _data = data
     _actor = actor
     _targets = targets

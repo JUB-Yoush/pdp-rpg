@@ -14,6 +14,12 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 
 - use hard coded interactions to make sure rpg systems work
 - go one layer out and think about how players and enemies will notify the manager that it's thier turn
+	- make action pieces work
+	  - have enemies feed actions into pieces
+	  - spawn these pieces into the grid at the beginning of the puzzle phase
+	  - decrement the counter on every action piece at the end of each puzzle phase
+	  - when it reaches 0, call the action stored in the piece
+	- spawn those pieces onto the board in a row
   - party: it's an array we go though (all party members act at the same time)
   - enemies: notified by purple blocks counting down
   - make the ui/ai systems that let partymems and enemies pick actions

@@ -1,11 +1,12 @@
 extends Node2D
-
+class_name Grid
 const width = 6
 const height = 12
 var x_start:int 
 var y_start:int
 var offset = 24
 var PieceScene = preload("res://src/puzzle_game/piece.tscn")
+var ActionPieceScene = preload("res://src/puzzle_game/action_piece.tscn")
 
 enum TYPE {RE,BL,GR,YE,PR,EM}
 var colour_count := TYPE.values().size() -1
@@ -50,10 +51,21 @@ func make_piece(type_int:int) -> Piece:
 	new_piece.empty = false
 	return new_piece
 
-func make_action_piece(type_int:int) -> Piece:
-	var new_piece :Piece = PieceScene.instantiate()
-	new_piece.empty = false
-	return new_piece
+func make_action_piece(action:Action) -> ActionPiece:
+	var new_action_piece :ActionPiece = ActionPieceScene.instantiate()
+	new_action_piece.type = TYPE.PR
+	new_action_piece.action = action
+	new_action_piece.countdown_time = action._data.countdown_time
+	new_action_piece.empty = false
+	return new_action_piece
+
+func insert_action_piece(col,row,actionPiece):
+	add_child(actionPiece)
+	actionPiece.countdown_finished.connect(action_countdown_finished)
+	grid_array[col][row] = actionPiece
+	actionPiece.col = col
+	actionPiece.row = row
+	actionPiece.position = grid_to_pixel(col,row)
 
 func make_empty_piece() -> Piece:
 	var new_piece :Piece = PieceScene.instantiate()
@@ -66,17 +78,22 @@ func grid_to_pixel(column,row):
 	var new_y = y_start + -offset * row
 	return Vector2(new_x,new_y)
 
-func rng_piece(i,j):
+func rng_piece(col,row):
 	var tries := 0
 	var rng = randi_range(0,colour_count -2)
 	var newPiece = make_piece(rng)
-	while(match_at(i,j,rng) and tries < 100):
+	while(match_at(col,row,rng) and tries < 100):
 		rng = randi_range(0,colour_count -2)
 		tries += 1
 		newPiece = make_piece(rng)
+	newPiece.col = col
+	newPiece.row = row
 	add_child(newPiece)
-	grid_array[i][j] = newPiece
-	newPiece.position = grid_to_pixel(i,j)
+
+	newPiece.col = col
+	newPiece.row = row
+	grid_array[col][row] = newPiece
+	newPiece.position = grid_to_pixel(col,row)
 
 func fill_grid():
 	call_every_pos(rng_piece)
@@ -104,12 +121,50 @@ func add_rows(new_rows:int):
 	#add new piece at bottom
 	pass
 
+func add_rows_with_actions(new_rows:int,actions:Array[Action]):
+	# generate random numbers between 0 and the amount of blocks to be added rows * width
+	# when a total count is at that number then add the action
+	var count := 0
 
+	var action_positions :Array[int] = []
+	var total_additions = new_rows * width
+
+	#generate unique set of spawn positions
+	while action_positions.size() < actions.size():
+		var rng = randi_range(0,total_additions)
+		if !action_positions.has(rng):
+			action_positions.append(rng)
+
+	for x in range(new_rows):
+		for col in width:
+			var currRow = 0
+
+			while !grid_array[col][currRow].empty:
+				currRow += 1
+				#if currRow == height:  # if you topped out leave function
+					#topout()
+					#return
+			#if currRow < height:
+			#move every other piece on row up by one
+
+			for i in range(currRow,0,-1):
+				drop_piece(col,i,i-1)
+			if action_positions.has(count):
+				#var action_piece = make_action_piece(actions[action_positions.find(count)])
+				var action_piece := make_action_piece(actions.pop_front())
+				insert_action_piece(col,0,action_piece)
+			else:
+				rng_piece(col,0)	
+			count += 1
+			destroy_matches()
+				
 func change_to_empty(col:int,row:int):
 	#change a piece at a positions to an empty piece
 	var new_empty := make_empty_piece()
 	if grid_array[col][row] != null: grid_array[col][row].queue_free()
 	grid_array[col][row] = new_empty
+	new_empty.col = col
+	new_empty.row = row
 	add_child(new_empty)
 	new_empty.position = grid_to_pixel(col,row)
 
@@ -218,6 +273,24 @@ func collapse_colums():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("row_add"):
 		add_rows(1)
+	if event.is_action_pressed("tick_countdown"):
+		tick_action_pieces()
+
+
+func tick_action_pieces():
+	call_every_pos(
+		func tick_action(i,j):
+			if grid_array[i][j].is_action_piece:
+				grid_array[i][j].tick_countdown())
+
+
+func action_countdown_finished(actionPiece:ActionPiece):
+	get_parent().get_parent().play_opponent_action(actionPiece.action)
+	## remove piece 
+	change_to_empty(actionPiece.col,actionPiece.row)
+	collapseTimer.start(cleardrop_delay)
+	pass
+
 
 #func collapse_colum(i,j):
 	## check if current piece is empty and if any above it are NOT empty

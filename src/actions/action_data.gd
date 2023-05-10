@@ -14,6 +14,8 @@ enum ActionType {RED,GREEN}
 #green or red action
 @export var action_type:ActionType
 
+@export var countdown_time = 1
+
 @export var is_targeting_self := false
 @export var is_targeting_all := false
 

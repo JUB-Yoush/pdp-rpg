@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="AttackActionData" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="AttackActionData" load_steps=2 format=3 uid="uid://bg1httyta6yl3"]
 
 [ext_resource type="Script" path="res://src/actions/attack_action_data.gd" id="1_8vh55"]
 
@@ -10,5 +10,6 @@ label = "combat action placeholder text"
 energy_cost = 0
 element = 0
 action_type = 0
+countdown_time = 2
 is_targeting_self = false
 is_targeting_all = false

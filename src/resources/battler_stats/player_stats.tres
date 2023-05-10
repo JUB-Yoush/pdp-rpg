@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="BattlerStats" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="BattlerStats" load_steps=2 format=3 uid="uid://dj4tblxll0nny"]
 
 [ext_resource type="Script" path="res://src/battlers/battler_stats.gd" id="1_c02hy"]
 

@@ -7,7 +7,8 @@ var type:int
 var swap_anim_time:float = .1
 var can_swap:bool = true
 var matched = false
-var positon:Vector2i = Vector2.ZERO
+var col:int
+var row:int
 @onready var sprite = $Sprite
 
 
