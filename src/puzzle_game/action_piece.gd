@@ -15,6 +15,7 @@ func tick_countdown():
 	countdown_time -= 1
 	label.text = str(countdown_time)
 	if countdown_time == 0:
-		countdown_finished.emit(self)
+		pass
+		#countdown_finished.emit(self)
 
 

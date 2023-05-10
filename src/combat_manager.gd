@@ -25,6 +25,7 @@ var grid:Grid
 
 func _ready() -> void:
 	grid = puzzleGame.get_node("Grid")
+	grid.puzzle_time_ended.connect(end_puzzle)
 	for battler in battlers:
 		if battler.is_party_member:
 			_party_members.append(battler)
@@ -71,9 +72,8 @@ func make_opponent_actions(_active_opponents:Array[Battler]):
 	grid.add_rows_with_actions(_active_opponents.size(),action_array)
 	pass
 
-func end_puzzle():
-	# tick all purple boxes and check if any reached -1
-	# if they did then put those enemies in an array
+func end_puzzle(puzzle_points,ready_action_pieces):
+	# passed in is a dictonary of all points made from the puzzle phase as well as actions to call before the player can act
 	_state = STATES.TURN
 	start_enemy_turn()
 

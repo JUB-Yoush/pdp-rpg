@@ -17,7 +17,10 @@ var destroyTimer:Timer #timers for animation delays
 var collapseTimer:Timer
 var sidedrop_delay = .1 #animation delays
 var cleardrop_delay = .3
+var ready_action_pieces :Array[Action] = []
+var puzzle_points = {}
 
+signal puzzle_time_ended(puzzle_points,ready_action_pieces)
 
 func _ready() -> void:
 	x_start = get_viewport_rect().size.x/2 - (offset * width/2)
@@ -278,19 +281,26 @@ func _input(event: InputEvent) -> void:
 
 
 func tick_action_pieces():
-	call_every_pos(
-		func tick_action(i,j):
-			if grid_array[i][j].is_action_piece:
-				grid_array[i][j].tick_countdown())
+	for col in width:
+		for row in height:
+			if grid_array[col][row].is_action_piece:
+				grid_array[col][row].tick_countdown()
+				if grid_array[col][row].countdown_time == 0:
+					ready_action_pieces.append(grid_array[col][row])
+
+					
 
 
 func action_countdown_finished(actionPiece:ActionPiece):
-	get_parent().get_parent().play_opponent_action(actionPiece.action)
-	## remove piece 
+#	get_parent().get_parent().play_opponent_action(actionPiece.action)
 	change_to_empty(actionPiece.col,actionPiece.row)
 	collapseTimer.start(cleardrop_delay)
 	pass
 
+
+func puzzle_timeout():
+	#when the puzzle timer reaches 0, get all the active action pieces and send them back to the combat manager
+	pass
 
 #func collapse_colum(i,j):
 	## check if current piece is empty and if any above it are NOT empty
