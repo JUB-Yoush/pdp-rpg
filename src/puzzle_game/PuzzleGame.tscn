@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dnr8ns7dtkp5w"]
+[gd_scene load_steps=5 format=3 uid="uid://dnr8ns7dtkp5w"]
 
+[ext_resource type="Script" path="res://src/puzzle_game/puzzle_game.gd" id="1_uicm7"]
 [ext_resource type="Script" path="res://src/puzzle_game/Grid.gd" id="2_wdrg7"]
 [ext_resource type="PackedScene" uid="uid://b1j26omn5kpo3" path="res://src/puzzle_game/cursor.tscn" id="3_kbrgb"]
+[ext_resource type="Script" path="res://src/puzzle_game/piece_factory.gd" id="4_5jc7a"]
 
 [node name="PuzzleGame" type="Node2D"]
 visible = false
+script = ExtResource("1_uicm7")
 metadata/_edit_vertical_guides_ = [322.0]
 
 [node name="Grid" type="Node2D" parent="."]
@@ -14,6 +17,7 @@ starting_row_count = 4
 [node name="Cursor" parent="." instance=ExtResource("3_kbrgb")]
 
 [node name="PieceFactory" type="Node2D" parent="."]
+script = ExtResource("4_5jc7a")
 
 [node name="DestoryTimer" type="Timer" parent="."]
 wait_time = 0.3
