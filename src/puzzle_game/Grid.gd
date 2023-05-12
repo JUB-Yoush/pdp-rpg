@@ -13,8 +13,11 @@ var colour_count := TYPE.values().size() -1
 # STORES IN Y,X FORMAT
 var grid_array := [] # grid in array form
 @export_range(0,height) var starting_row_count:int  
+
 var destroyTimer:Timer #timers for animation delays
 var collapseTimer:Timer
+var puzzleTimer:Timer # when timeout go to the rpg phase
+
 var sidedrop_delay = .1 #animation delays
 var cleardrop_delay = .3
 var ready_action_pieces :Array[Action] = []
@@ -299,7 +302,9 @@ func action_countdown_finished(actionPiece:ActionPiece):
 
 
 func puzzle_timeout():
+	puzzle_time_ended.emit(puzzle_points,ready_action_pieces)
 	#when the puzzle timer reaches 0, get all the active action pieces and send them back to the combat manager
+
 	pass
 
 #func collapse_colum(i,j):

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dnr8ns7dtkp5w"]
 
 [ext_resource type="Script" path="res://src/puzzle_game/Grid.gd" id="2_wdrg7"]
-[ext_resource type="PackedScene" uid="uid://jqj2wrorbo4b" path="res://src/puzzle_game/cursor.tscn" id="3_kbrgb"]
+[ext_resource type="PackedScene" uid="uid://b1j26omn5kpo3" path="res://src/puzzle_game/cursor.tscn" id="3_kbrgb"]
 
 [node name="PuzzleGame" type="Node2D"]
 visible = false
@@ -13,6 +13,8 @@ starting_row_count = 4
 
 [node name="Cursor" parent="." instance=ExtResource("3_kbrgb")]
 
+[node name="PieceFactory" type="Node2D" parent="."]
+
 [node name="DestoryTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
@@ -20,3 +22,6 @@ one_shot = true
 [node name="CollapseTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
+
+[node name="PuzzleTimer" type="Timer" parent="."]
+wait_time = 10.0

@@ -19,6 +19,7 @@ var _state = STATES.TURN
 var _party_members :Array[Battler]= []
 var _opponents :Array[Battler]= []
 @onready var puzzleGame := $PuzzleGame
+var puzzle_points
 var grid:Grid 
 @onready var battlers := $Battlers.get_children()
 
@@ -72,13 +73,17 @@ func make_opponent_actions(_active_opponents:Array[Battler]):
 	grid.add_rows_with_actions(_active_opponents.size(),action_array)
 	pass
 
-func end_puzzle(puzzle_points,ready_action_pieces):
+func end_puzzle(puzzle_points,ready_action_pieces:Array[ActionPiece]):
 	# passed in is a dictonary of all points made from the puzzle phase as well as actions to call before the player can act
 	_state = STATES.TURN
-	start_enemy_turn()
+	start_enemy_turn(ready_action_pieces)
 
-func start_enemy_turn():
-	pass
+func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
+	for actionPiece in ready_action_pieces:
+		var enemy:Battler = actionPiece.action._actor
+		## if enemy can act
+		enemy.act(actionPiece.action)
+		await enemy.action_finished
 
 func start_turn():
 	#loop thru enemies and put in speed-sorted array
