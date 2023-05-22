@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dnr8ns7dtkp5w"]
 
 [ext_resource type="Script" path="res://src/puzzle_game/puzzle_game.gd" id="1_uicm7"]
-[ext_resource type="Script" path="res://src/puzzle_game/Grid.gd" id="2_wdrg7"]
+[ext_resource type="Script" path="res://src/puzzle_game/grid.gd" id="2_hvm35"]
 [ext_resource type="PackedScene" uid="uid://b1j26omn5kpo3" path="res://src/puzzle_game/cursor.tscn" id="3_kbrgb"]
 [ext_resource type="Script" path="res://src/puzzle_game/piece_factory.gd" id="4_5jc7a"]
 [ext_resource type="Script" path="res://src/puzzle_game/puzzle_timer.gd" id="5_53jne"]
@@ -16,8 +16,8 @@ script = ExtResource("1_uicm7")
 metadata/_edit_vertical_guides_ = [322.0]
 
 [node name="Grid" type="Node2D" parent="."]
-script = ExtResource("2_wdrg7")
-starting_row_count = 4
+script = ExtResource("2_hvm35")
+starting_row_count = 3
 
 [node name="Cursor" parent="." instance=ExtResource("3_kbrgb")]
 
@@ -55,4 +55,31 @@ offset_right = 346.0
 offset_bottom = 50.0
 theme = SubResource("Theme_mpqnt")
 text = "1.1"
+horizontal_alignment = 1
+
+[node name="PuzzlePointContainer" type="HBoxContainer" parent="."]
+offset_left = 134.0
+offset_top = 44.0
+offset_right = 513.0
+offset_bottom = 84.0
+alignment = 1
+
+[node name="RE" type="Label" parent="PuzzlePointContainer"]
+layout_mode = 2
+text = "RE:0"
+horizontal_alignment = 1
+
+[node name="BL" type="Label" parent="PuzzlePointContainer"]
+layout_mode = 2
+text = "BL:0"
+horizontal_alignment = 1
+
+[node name="GR" type="Label" parent="PuzzlePointContainer"]
+layout_mode = 2
+text = "GR:0"
+horizontal_alignment = 1
+
+[node name="YE" type="Label" parent="PuzzlePointContainer"]
+layout_mode = 2
+text = "YE:0"
 horizontal_alignment = 1

@@ -8,7 +8,8 @@ var max_time = 10
 
 func _ready() -> void:
     progressBar.max_value = max_time
-    timeout.connect(func():print('tiemout')) ## make sure collapse/destroy timer isn't running when you timeout
+    one_shot = true
+    #timeout.connect(timeout_func) ## make sure collapse/destroy timer isn't running when you timeout
 
 func _physics_process(delta: float) -> void:
     if !is_stopped():
@@ -26,5 +27,8 @@ func add_time(extra_time:float):
 func _input(event: InputEvent) -> void:
     if event.is_action_pressed("add_time"):
         add_time(1.0)
+    if event.is_action_pressed("pause"):
+        paused = !paused
 
 
+#func timeout_func():

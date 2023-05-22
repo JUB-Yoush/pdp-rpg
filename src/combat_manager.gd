@@ -13,6 +13,7 @@ need a state system to manage if we're playing the puzzle game or not
 party members are stored in an array and thier turns are called
 
 """
+
 enum STATES {PUZZLE,TURN}
 var _state = STATES.TURN
 
@@ -46,10 +47,10 @@ func _play_turn(battler:Battler):
 	await battler.action_finished
 	pass
 
-# when an action block counts down
-func play_opponent_action(action:Action):
-	action._actor.act(action)
-	pass
+## when an action block counts down
+#func play_opponent_action(action:Action):
+	#action._actor.act(action)
+	#pass
 	
 func end_turn():
 	_state = STATES.PUZZLE
@@ -72,11 +73,11 @@ func make_opponent_actions(_active_opponents:Array[Battler]):
 	var action_array :Array[Action]= [action]
 	#might be better to route thru puzzle game node
 	grid.add_rows_with_actions(_active_opponents.size(),action_array)
-	pass
 
-func end_puzzle(puzzle_points,ready_action_pieces:Array[ActionPiece]):
+func end_puzzle(new_puzzle_points,ready_action_pieces:Array[ActionPiece]):
 	# passed in is a dictonary of all points made from the puzzle phase as well as actions to call before the player can act
 	_state = STATES.TURN
+	puzzle_points = new_puzzle_points
 	start_turn(ready_action_pieces)
 
 func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
@@ -89,6 +90,7 @@ func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
 
 func start_turn(enemy_action_pieces):
 	start_enemy_turn(enemy_action_pieces)
+	start_party_turn()
 
 	#loop thru enemies and put in speed-sorted array
 	# play turn for each purple counted down
@@ -97,5 +99,14 @@ func start_turn(enemy_action_pieces):
 	# sort them by speed stat
 	# play_turn for each of them
 	# at end of loop go back to puzzle ig
+	pass
+
+func start_party_turn():
+	# loop through all our party members
+	# sort them by speed stat
+	# play_turn for each of them
+	# at end of loop go back to puzzle ig
+	end_turn()
+
 
 	pass

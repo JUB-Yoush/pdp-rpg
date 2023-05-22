@@ -33,15 +33,12 @@ func _input(event: InputEvent) -> void:
 		move(input_dir)
 
 	if event.is_action_pressed("accept"):
-		print(grid_position)
 		grid.swap_pieces(grid_position)
-		print(grid_position)
 
 
 	
 func move(input_dir:Vector2i):
 	var new_position := grid_position + input_dir
-	print(new_position)
 	#if within the grid
 	if new_position >= Vector2i.ZERO and new_position <= max_position:
 		grid_position += input_dir

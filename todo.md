@@ -12,6 +12,12 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 - ~~design the different kinds of blocks there will be/whole battle system (PUSH AND PULL JAYDEN)~~
 - ~~work on spawning different kinds of blocks and from the bottom~~ 
 
+what's left of the puzzle systems:
+- design a combo system (pieces in a combo are worth thier combo amount + 1)
+- fix score allocation (1 point per piece, any pieces above 3 are worth 2 each)
+- let the player spend 5 seconds to spawn in an extra row?
+
+
 - use hard coded interactions to make sure rpg systems work
 - go one layer out and think about how players and enemies will notify the manager that it's thier turn
 	- make action pieces work
@@ -35,7 +41,7 @@ kinds of pieces:
 - red: power points, gives you points to do active skills with 
 - green: tech points, gives you points to do passive skills with 
 - blue: defence, feeds into a slay the spire style defence pool that tanks damage before it reaches your HP
-- yellow: increases multiplier for all other things? ~~(might be op) or gold (might not be helpful)~~ 
+- yellow: gives time back
 - purple: enemy attacks, countdown style (seperate from other styles of blocks), once it hits 0 an enemy acts
 - garbage: pdp style garbage logs that spawn in from the top (not nessicary ig?)
 - topping out is a insta die

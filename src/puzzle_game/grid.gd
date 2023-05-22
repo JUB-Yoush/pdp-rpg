@@ -24,7 +24,9 @@ var cleardrop_delay = .3
 var ready_action_pieces :Array[Action] = []
 var puzzle_points = {}
 
-signal puzzle_time_ended(puzzle_points,ready_action_pieces)
+var checked_pieces:Array[Piece] = []
+
+signal cleared_lines(puzzle_point_dict)
 
 func _ready() -> void:
 	pieceFactory = get_parent().get_node("PieceFactory")
@@ -135,7 +137,6 @@ func add_rows_with_actions(new_rows:int,actions:Array[Action]):
 			for i in range(currRow,0,-1):
 				drop_piece(col,i,i-1)
 			if action_positions.has(count):
-				#var action_piece = make_action_piece(actions[action_positions.find(count)])
 				var action_piece := pieceFactory.make_action_piece(actions.pop_front())
 				insert_action_piece(col,0,action_piece)
 			else:
@@ -173,6 +174,8 @@ func swap_pieces(cursor_pos):
 		grid_array[cursor_pos.x][cursor_pos.y] = grid_array[cursor_pos.x+1][cursor_pos.y] 
 		grid_array[cursor_pos.x+1][cursor_pos.y]=temp
 
+		valueL.col = cursor_pos.x+1
+		valueR.col = cursor_pos.x
 
 		valueL.move(grid_to_pixel(cursor_pos.x+1,cursor_pos.y))
 		valueR.move(grid_to_pixel(cursor_pos.x,cursor_pos.y))
@@ -186,6 +189,11 @@ func drop_piece(col:int,dropRow:int,emptyRow:int):
 	var temp:Piece = grid_array[col][emptyRow]
 	grid_array[col][emptyRow] = grid_array[col][dropRow]
 	grid_array[col][dropRow] = temp
+	
+	valueD.col = col
+	valueD.row = dropRow
+	valueU.col = col
+	valueU.row = emptyRow
 
 	valueD.move(grid_to_pixel(col,dropRow))
 	valueU.move(grid_to_pixel(col,emptyRow))
@@ -196,6 +204,7 @@ func topout():
 
 
 func find_matches():
+	var found_match = false
 	call_every_pos(
 		func find_match(i,j):
 
@@ -204,6 +213,7 @@ func find_matches():
 		if i > 0 && i < width - 1:
 			if !grid_array[i-1][j].empty && !grid_array[i+1][j].empty:
 				if grid_array[i-1][j].type == current_type && grid_array[i+1][j].type == current_type:
+					found_match = true
 					grid_array[i-1][j].matched = true
 					grid_array[i-1][j].dim()
 					grid_array[i][j].matched = true
@@ -214,6 +224,7 @@ func find_matches():
 		if j > 0 && j < height - 1:
 			if !grid_array[i][j-1].empty && !grid_array[i][j+1].empty:
 				if grid_array[i][j-1].type == current_type && grid_array[i][j+1].type == current_type:
+					found_match = true
 					grid_array[i][j-1].matched = true
 					grid_array[i][j-1].dim()
 					grid_array[i][j].matched = true
@@ -221,6 +232,7 @@ func find_matches():
 					grid_array[i][j+1].matched = true
 					grid_array[i][j+1].dim()
 					)
+	cleared_lines.emit(collect_matches())
 	destroyTimer.start()
 
 
@@ -231,12 +243,15 @@ func call_every_pos(passed_func:Callable):
 			passed_func.call(i,j)
 
 
+
 func destroy_matches():
 	call_every_pos(
 		func destroy_match(i,j):
 			if !grid_array[i][j].empty && grid_array[i][j].matched:
-					
-					change_to_empty(i,j))
+
+				change_to_empty(i,j)
+
+					)
 
 	collapseTimer.start(cleardrop_delay)
 
@@ -259,10 +274,6 @@ func collapse_colums():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("row_add"):
 		add_rows(1)
-	if event.is_action_pressed("tick_countdown"):
-		#tick_action_pieces()
-		pass
-
 
 func collect_action_pieces():
 	var action_pieces :Array[ActionPiece]= []
@@ -272,16 +283,49 @@ func collect_action_pieces():
 				action_pieces.append(grid_array[col][row])
 	return action_pieces
 
-					
 
+func collect_matches() -> Dictionary:
+	# we can use Vector2is as "tuples" to store (color code,# of pieces matched)
+	checked_pieces = []
+	var matches :Dictionary= {
+		TYPE.RE:0,
+		TYPE.BL:0,
+		TYPE.GR:0,
+		TYPE.YE:0,
+		TYPE.PR:0
+	}
+
+	for col in width:
+		for row in height:
+			if grid_array[col][row].matched:
+				matches[grid_array[col][row].type] += 1	
+	return matches
+
+#func recursive_match_check(col,row):
+	##var current_piece:Piece= grid_array[col][row] 
+	#if checked_pieces.has(grid_array[col][row]):
+		#return 0
+
+	## if it's within the grid, matched, and the types are the same
+	#if col +1 <= width and grid_array[col +1][row].matched and grid_array[col][row].type == grid_array[col +1][row].type:
+		#return recursive_match_check(col+1,row) + 1
+
+	#if col -1 >= width and grid_array[col -1][row].matched and grid_array[col][row].type == grid_array[col -1][row].type:
+		#return recursive_match_check(col-1,row) + 1
+
+	#if row +1 <= height and grid_array[col][row +1].matched and grid_array[col][row].type == grid_array[col][row +1].type:
+		#return recursive_match_check(col,row+1) + 1
+
+	#if row +1 <= height and grid_array[col][row -1].matched and grid_array[col][row].type == grid_array[col][row -1].type:
+		#return recursive_match_check(col,row-1) + 1
+	#else:
+		#return 1
 
 func action_countdown_finished(actionPiece:ActionPiece):
-#	get_parent().get_parent().play_opponent_action(actionPiece.action)
 	actionPiece.dim()
 	await actionPiece.action_preformed
 	change_to_empty(actionPiece.col,actionPiece.row)
 	collapseTimer.start(cleardrop_delay)
-	pass
 
 
 
