@@ -32,4 +32,3 @@ actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_u0
 is_party_member = false
 
 [node name="PuzzleGame" parent="CombatManager" instance=ExtResource("6_p00x7")]
-visible = true

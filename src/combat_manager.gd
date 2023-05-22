@@ -18,15 +18,15 @@ var _state = STATES.TURN
 
 var _party_members :Array[Battler]= []
 var _opponents :Array[Battler]= []
-@onready var puzzleGame := $PuzzleGame
 var puzzle_points
 var grid:Grid 
+@onready var puzzleGame := $PuzzleGame
 @onready var battlers := $Battlers.get_children()
 
 
 func _ready() -> void:
 	grid = puzzleGame.get_node("Grid")
-	grid.puzzle_time_ended.connect(end_puzzle)
+	puzzleGame.done_puzzling.connect(end_puzzle)
 	for battler in battlers:
 		if battler.is_party_member:
 			_party_members.append(battler)
@@ -34,7 +34,7 @@ func _ready() -> void:
 			_opponents.append(battler)
 	
 	print(_party_members[0])
-	start_puzzle()
+	end_turn()
 
 func _play_turn(battler:Battler):
 	# this is where the battler would pick thier action and target
@@ -59,9 +59,9 @@ func end_turn():
 func start_puzzle():
 	var _active_opponents :Array[Battler]= [_opponents[0]]
 	make_opponent_actions(_active_opponents)
+	puzzleGame.start_puzzling()
 
 
-	pass
 
 func make_opponent_actions(_active_opponents:Array[Battler]):
 	#loop thru every opponent and...
@@ -70,13 +70,14 @@ func make_opponent_actions(_active_opponents:Array[Battler]):
 	var basicAttack :AttackActionData = load("res://src/resources/attack_actions/basic_attack.tres")
 	var action := AttackAction.new(basicAttack,battler,targets)
 	var action_array :Array[Action]= [action]
+	#might be better to route thru puzzle game node
 	grid.add_rows_with_actions(_active_opponents.size(),action_array)
 	pass
 
 func end_puzzle(puzzle_points,ready_action_pieces:Array[ActionPiece]):
 	# passed in is a dictonary of all points made from the puzzle phase as well as actions to call before the player can act
 	_state = STATES.TURN
-	start_enemy_turn(ready_action_pieces)
+	start_turn(ready_action_pieces)
 
 func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
 	for actionPiece in ready_action_pieces:
@@ -84,8 +85,11 @@ func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
 		## if enemy can act
 		enemy.act(actionPiece.action)
 		await enemy.action_finished
+		actionPiece.action_preformed.emit()
 
-func start_turn():
+func start_turn(enemy_action_pieces):
+	start_enemy_turn(enemy_action_pieces)
+
 	#loop thru enemies and put in speed-sorted array
 	# play turn for each purple counted down
 

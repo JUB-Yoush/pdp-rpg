@@ -1,12 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://dnr8ns7dtkp5w"]
+[gd_scene load_steps=8 format=3 uid="uid://dnr8ns7dtkp5w"]
 
 [ext_resource type="Script" path="res://src/puzzle_game/puzzle_game.gd" id="1_uicm7"]
 [ext_resource type="Script" path="res://src/puzzle_game/Grid.gd" id="2_wdrg7"]
 [ext_resource type="PackedScene" uid="uid://b1j26omn5kpo3" path="res://src/puzzle_game/cursor.tscn" id="3_kbrgb"]
 [ext_resource type="Script" path="res://src/puzzle_game/piece_factory.gd" id="4_5jc7a"]
+[ext_resource type="Script" path="res://src/puzzle_game/puzzle_timer.gd" id="5_53jne"]
+[ext_resource type="FontFile" uid="uid://t0ckvlv6kh50" path="res://assets/fonts/Awe Mono Gold.ttf" id="6_hwwuu"]
+
+[sub_resource type="Theme" id="Theme_mpqnt"]
+default_font = ExtResource("6_hwwuu")
+default_font_size = 32
 
 [node name="PuzzleGame" type="Node2D"]
-visible = false
 script = ExtResource("1_uicm7")
 metadata/_edit_vertical_guides_ = [322.0]
 
@@ -28,4 +33,26 @@ wait_time = 0.3
 one_shot = true
 
 [node name="PuzzleTimer" type="Timer" parent="."]
-wait_time = 10.0
+script = ExtResource("5_53jne")
+
+[node name="ProgressBar" type="ProgressBar" parent="PuzzleTimer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 110.0
+offset_top = 9.0
+offset_right = -106.0
+offset_bottom = -342.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+show_percentage = false
+
+[node name="Label" type="Label" parent="PuzzleTimer"]
+offset_left = 298.0
+offset_top = 15.0
+offset_right = 346.0
+offset_bottom = 50.0
+theme = SubResource("Theme_mpqnt")
+text = "1.1"
+horizontal_alignment = 1

@@ -9,6 +9,7 @@ var y_start:int
 var input_dir:Vector2
 var grid_array
 var grid
+
 @onready var sprite := $sprite
 func _ready():
 	x_start = get_viewport_rect().size.x/2 - (step * width/2)
