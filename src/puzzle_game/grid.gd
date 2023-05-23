@@ -55,6 +55,8 @@ func start_grid():
 	call_every_pos(change_to_empty)
 
 func insert_action_piece(col,row,actionPiece):
+	if !grid_array[col][row].empty:
+		push_error("insering action piece in non-empty spot")
 	add_child(actionPiece)
 	#actionPiece.countdown_finished.connect(action_countdown_finished)
 	grid_array[col][row] = actionPiece

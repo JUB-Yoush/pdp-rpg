@@ -11,7 +11,7 @@ var puzzle_points = {
 		TYPE.PR:0}
 
 var is_puzzling = true
-var puzzle_time = 10.0
+var puzzle_time = 5.0
 
 signal done_puzzling(puzzle_points,ready_action_pieces)
 

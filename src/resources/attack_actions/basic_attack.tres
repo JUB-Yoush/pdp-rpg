@@ -10,6 +10,6 @@ label = "combat action placeholder text"
 energy_cost = 0
 element = 0
 action_type = 0
-countdown_time = 4
+countdown_time = 3
 is_targeting_self = false
 is_targeting_all = false

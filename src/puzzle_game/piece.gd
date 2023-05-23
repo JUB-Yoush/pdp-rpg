@@ -25,6 +25,10 @@ func _ready() -> void:
 			#sprite.texture = load("res://assets/block-PURPLE.png")
 		#COLORS.YE:
 			#sprite.texture = load("res://assets/block-YELLOW.png")
+	if type == TYPE.EM:
+		z_index = -100
+
+
 
 func move(new_pos:Vector2):
 	var tween = create_tween()
