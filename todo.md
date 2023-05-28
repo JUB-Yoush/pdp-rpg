@@ -23,9 +23,13 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 	~~- debuff actions~~
 	~~- heal actions~~
 ~~- add stat modifing actions (figure out a turn time limit system)~~
-- add Ui for users to select their actions and targets
+
+- make all actions have a red and green cost
+- get skill cost working (feed puzzle points through the battlers?)
 - add bad Ai for enemies to select actions (weighted randomization)
 - ko/negative hp state for pm
+
+- add Ui for users to select their actions and targets
 - heal party in between fights
 - create content
 - radomization

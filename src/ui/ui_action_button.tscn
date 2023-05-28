@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://cx4wa4flc30g4"]
+
+[ext_resource type="Theme" uid="uid://4n7n1rpxwi13" path="res://src/theme/combat_ui_theme.tres" id="1_0i6qt"]
+[ext_resource type="Texture2D" uid="uid://crwauqjpetsk8" path="res://assets/ui/action-button.png" id="1_gdab2"]
+[ext_resource type="Texture2D" uid="uid://bql4cvg2ewygb" path="res://assets/ui/action-button-pressed.png" id="2_84ua7"]
+[ext_resource type="Texture2D" uid="uid://drgsrxqt665n3" path="res://assets/ui/action-button-disabled.png" id="3_l4rcw"]
+[ext_resource type="Texture2D" uid="uid://wn80cpp5hhyj" path="res://assets/ui/action-icon.png" id="4_yatln"]
+[ext_resource type="Script" path="res://src/ui/ui_action_button.gd" id="5_0yqjk"]
+[ext_resource type="FontFile" uid="uid://t0ckvlv6kh50" path="res://assets/fonts/Awe Mono Gold.ttf" id="5_jk4px"]
+
+[node name="UIActionButton" type="TextureButton"]
+offset_right = 134.0
+offset_bottom = 32.0
+theme = ExtResource("1_0i6qt")
+texture_normal = ExtResource("1_gdab2")
+texture_pressed = ExtResource("2_84ua7")
+texture_disabled = ExtResource("3_l4rcw")
+texture_focused = ExtResource("2_84ua7")
+script = ExtResource("5_0yqjk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 4.0
+offset_right = -4.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Icon" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("4_yatln")
+stretch_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+modulate = Color(0.760784, 0.760784, 0.819608, 1)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("5_jk4px")
+text = "action label"

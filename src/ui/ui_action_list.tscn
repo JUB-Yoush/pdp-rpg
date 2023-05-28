@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://uyy8i3go258t"]
+
+[ext_resource type="PackedScene" uid="uid://cx4wa4flc30g4" path="res://src/ui/ui_action_button.tscn" id="1_mibb5"]
+[ext_resource type="Script" path="res://src/ui/ui_action_list.gd" id="1_rat00"]
+
+[node name="VBoxContainer" type="VBoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_rat00")
+
+[node name="UIActionButton" parent="." instance=ExtResource("1_mibb5")]
+layout_mode = 2
+
+[node name="UIActionButton2" parent="." instance=ExtResource("1_mibb5")]
+layout_mode = 2
+
+[node name="UIActionButton3" parent="." instance=ExtResource("1_mibb5")]
+layout_mode = 2

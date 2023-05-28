@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="BattlerUIData" load_steps=3 format=3 uid="uid://ch5erui2gjebe"]
+
+[ext_resource type="Script" path="res://src/ui/battler_ui_data.gd" id="1_oax8l"]
+[ext_resource type="Texture2D" uid="uid://d2r7n7upolq0a" path="res://assets/battlers/glup.png" id="2_8bmud"]
+
+[resource]
+script = ExtResource("1_oax8l")
+display_name = "GLUP SHITTO"
+texture = ExtResource("2_8bmud")

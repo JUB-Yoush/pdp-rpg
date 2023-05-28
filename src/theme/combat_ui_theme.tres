@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://4n7n1rpxwi13"]
+
+[ext_resource type="FontFile" uid="uid://t0ckvlv6kh50" path="res://assets/fonts/Awe Mono Gold.ttf" id="1_yftf1"]
+
+[resource]
+default_font = ExtResource("1_yftf1")

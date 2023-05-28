@@ -3,6 +3,7 @@ class_name Battler
 
 @export var stats:BattlerStats
 @export var ai_scene :PackedScene
+@export var ui_data:BattlerUIData
 @export var actions:Array[ActionData]
 @export var is_party_member:= true
 var acted:bool = false

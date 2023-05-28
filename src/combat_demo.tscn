@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dg0frypjhsr8x"]
+[gd_scene load_steps=8 format=3 uid="uid://dg0frypjhsr8x"]
 
 [ext_resource type="Script" path="res://src/combat_manager.gd" id="1_fjji6"]
+[ext_resource type="Texture2D" uid="uid://bqea1t7dreb25" path="res://assets/bg5.png" id="1_p1xa0"]
 [ext_resource type="Script" path="res://src/battlers/battler.gd" id="2_04bfm"]
 [ext_resource type="Resource" uid="uid://dj4tblxll0nny" path="res://src/resources/battler_stats/player_stats.tres" id="2_lkwfx"]
 [ext_resource type="Resource" path="res://src/resources/battler_stats/enemy_stats.tres" id="3_1fto6"]
@@ -8,6 +9,20 @@
 [ext_resource type="PackedScene" uid="uid://dnr8ns7dtkp5w" path="res://src/puzzle_game/PuzzleGame.tscn" id="6_p00x7"]
 
 [node name="CombatDemo" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -101
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 679.0
+offset_bottom = 379.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_p1xa0")
+stretch_mode = 1
 
 [node name="CombatManager" type="Node2D" parent="."]
 script = ExtResource("1_fjji6")
