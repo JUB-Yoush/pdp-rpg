@@ -1,5 +1,5 @@
 extends Timer
-
+class_name PuzzleTimer
 
 var max_time = 10
 
@@ -21,7 +21,7 @@ func _physics_process(delta: float) -> void:
 func add_time(extra_time:float):
     max_time = time_left + extra_time
     progressBar.max_value = int(time_left + 1)
-    start(time_left + extra_time)
+    start(max_time)
 
 
 func _input(event: InputEvent) -> void:

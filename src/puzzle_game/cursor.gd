@@ -40,7 +40,7 @@ func _input(event: InputEvent) -> void:
 func move(input_dir:Vector2i):
 	var new_position := grid_position + input_dir
 	#if within the grid
-	if new_position >= Vector2i.ZERO and new_position <= max_position:
+	if new_position.x >= 0 and new_position.y >= 0 and new_position <= max_position:
 		grid_position += input_dir
 		position.x += input_dir.x * step
 		position.y += -input_dir.y * step

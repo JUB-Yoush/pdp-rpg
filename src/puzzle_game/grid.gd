@@ -44,6 +44,7 @@ func _ready() -> void:
 	collapseTimer.timeout.connect(collapse_colums)
 
 func make_grid_array():
+	# makes a 2d array based on the width and height
 	grid_array = []
 	for i in width:
 		grid_array.append([])
@@ -52,6 +53,7 @@ func make_grid_array():
 	return grid_array
 
 func start_grid():
+	# fills grid with empty pieces
 	call_every_pos(change_to_empty)
 
 func insert_action_piece(col,row,actionPiece):
@@ -73,7 +75,7 @@ func rng_piece(col,row):
 	var tries := 0
 	var rng = randi_range(0,colour_count -2)
 	var newPiece = pieceFactory.make_piece(rng)
-	while(match_at(col,row,rng) and tries < 100):
+	while(match_at(col,row,rng) and tries < 100): # makes sure it dosen't get stuck looping trying to add a piece
 		rng = randi_range(0,colour_count -2)
 		tries += 1
 		newPiece = pieceFactory.make_piece(rng)
@@ -107,8 +109,6 @@ func add_rows(new_rows:int):
 				
 
 
-	#add new piece at bottom
-	pass
 
 func add_rows_with_actions(new_rows:int,actions:Array[Action]):
 	# generate random numbers between 0 and the amount of blocks to be added rows * width

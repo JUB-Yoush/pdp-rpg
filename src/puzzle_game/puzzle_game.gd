@@ -11,7 +11,7 @@ var puzzle_points = {
 		TYPE.PR:0}
 
 var is_puzzling = true
-var puzzle_time = 5.0
+var puzzle_time = 10
 
 signal done_puzzling(puzzle_points,ready_action_pieces)
 
@@ -38,7 +38,7 @@ func puzzle_timer_timeout():
 	var ready_action_pieces = tick_action_pieces()
 	done_puzzling.emit(puzzle_points,ready_action_pieces)
 
-func tick_action_pieces() -> Array[ActionPiece]:
+func tick_action_pieces() -> Array[ActionPiece]: 
 	var action_pieces:Array[ActionPiece] = grid.collect_action_pieces()
 	var ready_action_pieces :Array[ActionPiece]= []
 	for actionPiece in action_pieces:
@@ -49,11 +49,19 @@ func tick_action_pieces() -> Array[ActionPiece]:
 	return ready_action_pieces
 
 func add_puzzle_points(added_puzzle_points:Dictionary):
+	var extra_time :=0.0
 	if added_puzzle_points.values() == [0,0,0,0,0]:
 		return
 	print(added_puzzle_points)
 	for key in added_puzzle_points.keys():
-		puzzle_points[key] += added_puzzle_points[key]
+		# any pieces after 3 are worth x2
+		var points:int = added_puzzle_points[key]
+		var extra_points: = points - 3	
+		points = 3 + (extra_points * 2)
+		puzzle_points[key] += points
+		if key == TYPE.YE:
+			extra_time = float(points) / 2
+			puzzleTimer.add_time(extra_time)
 	update_point_display()
 
 func update_point_display():
@@ -63,9 +71,17 @@ func update_point_display():
 	puzzlePointContainer.get_node("YE").text = "YE:" + str(puzzle_points[TYPE.YE])
 	#puzzlePointContainer.get_node("PR").text = "PR:" + str(puzzle_points[TYPE.PR])
 
+func exchange_time():
+	if puzzleTimer.time_left > 5.0:
+		grid.add_rows(1)
+		puzzleTimer.add_time(-5.0)
+		
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("tick_countdown"):
 		tick_action_pieces()
 	if event.is_action_pressed("puzzle_timeout"):
 		puzzle_timer_timeout()
+	if event.is_action_pressed("exhange_time"):
+		exchange_time()
+

@@ -12,27 +12,19 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 - ~~design the different kinds of blocks there will be/whole battle system (PUSH AND PULL JAYDEN)~~
 - ~~work on spawning different kinds of blocks and from the bottom~~ 
 
-what's left of the puzzle systems:
-- design a combo system (pieces in a combo are worth thier combo amount + 1)
-- fix score allocation (1 point per piece, any pieces above 3 are worth 2 each)
-- let the player spend 5 seconds to spawn in an extra row?
+~~what's left of the puzzle systems:~~
+~~- design a combo system (pieces in a combo are worth thier combo amount + 1)~~
+~~- fix score allocation (1 point per piece, any pieces above 3 are worth 2 each)~~
+~~- let the player spend 5 seconds to spawn in an extra row?~~
 
-
-- use hard coded interactions to make sure rpg systems work
-- go one layer out and think about how players and enemies will notify the manager that it's thier turn
-	- make action pieces work
-	  - have enemies feed actions into pieces
-	  - spawn these pieces into the grid at the beginning of the puzzle phase
-	  - decrement the counter on every action piece at the end of each puzzle phase
-	  - when it reaches 0, call the action stored in the piece
-	- spawn those pieces onto the board in a row
-  - party: it's an array we go though (all party members act at the same time)
-  - enemies: notified by purple blocks counting down
-  - make the ui/ai systems that let partymems and enemies pick actions
 
 - make more than just attackActions (figure out how to differetntiate them)
+	- buff actions
+	- debuff actions
+	- heal actions
 - add stat modifing actions (figure out a turn time limit system)
-
+- add Ui for users to select thier actions and targets
+- add Ai for enemies to select actions
 
 the battle system:
 kinds of pieces:
@@ -52,3 +44,9 @@ kinds of pieces:
 - pokemon style effectiveness types? and extra effective moves provide a bonus on the next puzzle round
 - alternate between puzzle rounds and spending rounds until enemies die or you die
 - don't even THINK about dungeon crawling until this is done >:(
+
+post mvp:
+- recognize combos (also maybe chains??)
+- dungeon crawling
+- leveling up
+- items

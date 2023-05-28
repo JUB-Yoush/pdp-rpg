@@ -17,7 +17,7 @@ metadata/_edit_vertical_guides_ = [322.0]
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource("2_hvm35")
-starting_row_count = 3
+starting_row_count = 5
 
 [node name="Cursor" parent="." instance=ExtResource("3_kbrgb")]
 
@@ -36,6 +36,7 @@ one_shot = true
 script = ExtResource("5_53jne")
 
 [node name="ProgressBar" type="ProgressBar" parent="PuzzleTimer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -83,3 +84,7 @@ horizontal_alignment = 1
 layout_mode = 2
 text = "YE:0"
 horizontal_alignment = 1
+
+[node name="PiecePos" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
