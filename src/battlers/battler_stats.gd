@@ -76,9 +76,8 @@ func _init() -> void:
 				_modifiers[stat] = {}
 
 func _recalculate_and_update(stat:String):
-		#Vector2(modifer value, turn count)
 		var value:float = get("base_" + stat)
-		var modifiers: Array[StatModifier] = _modifiers[stat].values()
+		var modifiers: Array = _modifiers[stat].values()
 		for modifier in modifiers:
 				value += modifier._value
 		value = max(value,0.0)
@@ -92,10 +91,12 @@ func add_modifier(stat_name:String,value:float,length:int) -> int:
 		_modifiers[stat_name][id].modifier_over.connect(remove_modifier)
 		modifer_timing_tracker.append(_modifiers[stat_name][id])
 		_recalculate_and_update(stat_name)
+		print("modified " , stat_name ," by ", str(value))
 		return id
 
 func remove_modifier(modifier:StatModifier)-> void:
 		assert(modifier._id in _modifiers[modifier._stat_name], "Id %s not found in %s" % [modifier._id, _modifiers[modifier._stat_name]])
+		print(modifier._value, " change to ", modifier._stat_name ," expried")
 		_modifiers[modifier._stat_name].erase(modifier._id)
 		_recalculate_and_update(modifier._stat_name)
 		modifer_timing_tracker.erase([modifer_timing_tracker.find(modifier)])

@@ -40,10 +40,10 @@ func _ready() -> void:
 func _play_turn(battler:Battler):
 	# this is where the battler would pick thier action and target
 	# hard coding interaction for now
+	#print(battler.stats.health)
 	var targets = [_party_members[0]]
-	var basicAttack :AttackActionData = load("res://src/resources/attack_actions/basic_attack.tres")
-	#var action := AttackAction.new(basicAttack,battler,targets)
-	var action:= ActionFactory.new_action(basicAttack,battler,targets)
+	var action_data :ActionData = load("res://src/resources/modifier_actions/buff_atk.tres")
+	var action:= ActionFactory.new_action(action_data,battler,targets)
 	battler.act(action)
 	await battler.action_finished
 	pass
@@ -112,3 +112,8 @@ func start_party_turn():
 
 
 	pass
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("end_turn"):
+		end_turn()

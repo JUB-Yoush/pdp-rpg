@@ -6,10 +6,10 @@
 script = ExtResource("1_8vh55")
 damage_multiplier = 0.8
 hit_chance = 100.0
-label = "combat action placeholder text"
-energy_cost = 0
+label = "basic attack"
+energy_cost = 5
 element = 0
-action_type = 0
+color_cost = 0
 countdown_time = 3
 is_targeting_self = false
 is_targeting_all = false

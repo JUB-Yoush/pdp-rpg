@@ -18,13 +18,18 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 ~~- let the player spend 5 seconds to spawn in an extra row?~~
 
 
-- make more than just attackActions (figure out how to differetntiate them)
-	- buff actions
-	- debuff actions
-	- heal actions
-- add stat modifing actions (figure out a turn time limit system)
-- add Ui for users to select thier actions and targets
-- add Ai for enemies to select actions
+~~- make more than just attackActions (figure out how to differetntiate them)~~
+	~~- buff actions~~
+	~~- debuff actions~~
+	~~- heal actions~~
+~~- add stat modifing actions (figure out a turn time limit system)~~
+- add Ui for users to select their actions and targets
+- add bad Ai for enemies to select actions (weighted randomization)
+- ko/negative hp state for pm
+- heal party in between fights
+- create content
+- radomization
+- done mvp!!!
 
 the battle system:
 kinds of pieces:
@@ -47,9 +52,11 @@ kinds of pieces:
 
 post mvp:
 - recognize combos (also maybe chains??)
+- real enemy ai
 - dungeon crawling
 - leveling up
 - items
 - status effects
 - multi action attacks (attacking + status + heal)
 - crits and weak hits give you more puzzle time
+- recruiting by clearing some sort of preset puzzle?

@@ -22,8 +22,9 @@ func take_hit(hit:Hit)-> void:
 		hit_missed.emit()
 
 func recover_hp(amount):
+	var old_hp = stats.health
 	stats.health += amount
-	prints("healed",amount,"health, health is now",stats.health)
+	prints("healed",amount, "from",old_hp, "health, health is now",stats.health)
 
 var is_selected := false: 
 	get:

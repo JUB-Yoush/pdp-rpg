@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ModifierActionData" load_steps=2 format=3 uid="uid://cbnsj35kiwdch"]
+
+[ext_resource type="Script" path="res://src/actions/modifier_action_data.gd" id="1_osaxf"]
+
+[resource]
+script = ExtResource("1_osaxf")
+stat_name = "attack"
+length = 3
+value = 5.0
+label = "boost attack for 3 turns"
+energy_cost = 7
+element = 0
+color_cost = 1
+countdown_time = 2
+is_targeting_self = false
+is_targeting_all = false

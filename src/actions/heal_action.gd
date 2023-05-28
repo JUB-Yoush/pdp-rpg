@@ -17,7 +17,6 @@ func calculate_potential_heal_for(target:Battler) -> int:
 func apply_async() -> bool:
 	# We apply the action to each target so attacks work both for single and multiple targets.
 	for target in _targets:
-		var hit_chance := Formulas.calculate_hit_chance(_data, _actor, target)
 		var heal_amount:= calculate_potential_heal_for(target)
 		# We're going to define a new function on the battler so it takes hits.
 		#make some cast class or somthing that you can use for 

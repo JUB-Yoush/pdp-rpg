@@ -3,6 +3,7 @@ extends Resource
 
 enum Elements {NONE,ROCK,PAPER,SCISSORS}
 enum ActionType {ATTACK,HEAL,MODIFIER}
+enum ColorCost {RE,GR}
 
 @export var icon: Texture
 @export var label: = "action placeholder text"
@@ -12,6 +13,8 @@ enum ActionType {ATTACK,HEAL,MODIFIER}
 @export var element: Elements
 
 var type:ActionType
+
+@export var color_cost:ColorCost
 
 @export var countdown_time = 1
 
