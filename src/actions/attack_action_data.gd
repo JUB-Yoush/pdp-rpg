@@ -6,3 +6,6 @@ class_name AttackActionData
 # Hit chance rating for this attack. Works as a rate: a value of 90 means the
 # action has a 90% chance to hit.
 @export var hit_chance := 100.0
+
+func _init() -> void:
+    type = ActionType.ATTACK

@@ -21,6 +21,10 @@ func take_hit(hit:Hit)-> void:
 		print("missed")
 		hit_missed.emit()
 
+func recover_hp(amount):
+	stats.health += amount
+	prints("healed",amount,"health, health is now",stats.health)
+
 var is_selected := false: 
 	get:
 		return is_selected
@@ -62,3 +66,7 @@ func act(action:Action) -> void:
 	#if is_active: 
 		#set_process(true)
 	action_finished.emit()
+
+func turn_ended():
+	stats.tick_modifiers()
+	# also get hit by status effects or somthing idk

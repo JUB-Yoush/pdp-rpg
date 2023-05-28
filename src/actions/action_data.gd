@@ -2,17 +2,16 @@ class_name ActionData
 extends Resource
 
 enum Elements {NONE,ROCK,PAPER,SCISSORS}
-enum ActionType {RED,GREEN}
+enum ActionType {ATTACK,HEAL,MODIFIER}
 
 @export var icon: Texture
-@export var label: = "combat action placeholder text"
+@export var label: = "action placeholder text"
 
 @export var energy_cost:= 0
 
 @export var element: Elements
 
-#green or red action
-@export var action_type:ActionType
+var type:ActionType
 
 @export var countdown_time = 1
 

@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource("1_c02hy")
 max_health = 20
-name = "PM1"
+name = "P1"
 weaknesses = []
 affinity = 0
 base_attack = 12

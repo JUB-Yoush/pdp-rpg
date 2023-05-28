@@ -50,3 +50,6 @@ post mvp:
 - dungeon crawling
 - leveling up
 - items
+- status effects
+- multi action attacks (attacking + status + heal)
+- crits and weak hits give you more puzzle time

@@ -43,3 +43,8 @@ static func _calculate_weakness_multiplier(action_data, defender) -> float:
 		elif Types.WEAKNESS_MAPPING[element] in defender.stats.weaknesses:
 			multiplier = 1.5
 	return multiplier
+
+
+static func calulate_heal_amount(_data:HealActionData, _actor:Battler, target:Battler) -> float:
+	#heals a percentage of your HP
+	return target.stats.max_health * _data.recovery_multiplier

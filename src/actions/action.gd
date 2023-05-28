@@ -2,9 +2,12 @@ class_name Action
 
 signal finished
 
+
 var _data
 var _actor:Battler
 var _targets := []
+
+    
 
 func _init(data:ActionData,actor:Battler,targets) -> void:
     _data = data
