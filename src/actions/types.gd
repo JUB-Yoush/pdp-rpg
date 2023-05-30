@@ -9,4 +9,5 @@ const WEAKNESS_MAPPING = {
     Elements.SCISSORS: Elements.PAPER,
     Elements.PAPER: Elements.ROCK
 }
-
+enum ActionType {ATTACK,HEAL,MODIFIER}
+enum ColorCost {RE,GR}

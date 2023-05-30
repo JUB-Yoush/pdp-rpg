@@ -63,12 +63,30 @@ func act(action:Action) -> void:
 		##skip checking energy
 
 	#energy won't be stored in indivisual party members
-	##stats.energy -= action.get_energy_cost()
+	remove_energy(action)
 	await action.apply_async()
 	#if is_active: 
 		#set_process(true)
 	action_finished.emit()
 
 func turn_ended():
+
 	stats.tick_modifiers()
 	# also get hit by status effects or somthing idk
+	var puzzle_points = get_parent().get_parent().puzzle_points
+	puzzle_points[Types.ColorCost.RE] = stats.red_points  
+	puzzle_points[Types.ColorCost.GR] = stats.green_points  
+	get_parent().get_parent().puzzle_points = puzzle_points
+
+func turn_started():
+	var puzzle_points = get_parent().get_parent().puzzle_points
+	stats.red_points = puzzle_points[Types.ColorCost.RE]
+	stats.green_points = puzzle_points[Types.ColorCost.GR]
+
+
+func remove_energy(action):
+	var cost = action.get_energy_cost()
+	if action._data.red_cost == 0:
+		stats.green_energy -= cost 
+	if action._data.green_cost == 0:
+		stats.red_energy -= cost 

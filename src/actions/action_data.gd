@@ -12,9 +12,12 @@ enum ColorCost {RE,GR}
 
 @export var element: Elements
 
+# set based on inherited action type
 var type:ActionType
 
-@export var color_cost:ColorCost
+@export var red_cost:int 
+
+@export var green_cost:int
 
 @export var countdown_time = 1
 

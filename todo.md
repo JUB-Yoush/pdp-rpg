@@ -55,6 +55,8 @@ kinds of pieces:
 - don't even THINK about dungeon crawling until this is done >:(
 
 post mvp:
+- fix things that could be static classes/objects instead of nodes
+- fix modifers checking based on strings instead of an enum
 - recognize combos (also maybe chains??)
 - real enemy ai
 - dungeon crawling

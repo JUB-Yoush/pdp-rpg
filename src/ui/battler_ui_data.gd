@@ -5,3 +5,4 @@ class_name BattlerUIData
 @export var texture:Texture
 
 
+

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackActionData" load_steps=2 format=3 uid="uid://b57gbjxmihkei"]
+
+[ext_resource type="Script" path="res://src/actions/attack_action_data.gd" id="1_qsrs5"]
+
+[resource]
+script = ExtResource("1_qsrs5")
+damage_multiplier = 1.0
+hit_chance = 100.0
+label = "action placeholder text"
+energy_cost = 0
+element = 0
+red_cost = 0
+green_cost = 0
+countdown_time = 1
+is_targeting_self = false
+is_targeting_all = false

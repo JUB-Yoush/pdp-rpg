@@ -31,6 +31,11 @@ func targets_opponents() -> bool:
     return true
 
 func get_energy_cost() -> int:
-    return _data.energy_cost
+    if _data.red_cost == 0:
+        return _data.green_cost
+    elif _data.green_cost == 0:
+        return _data.red_cost
+    else:
+        return 0
 
 
