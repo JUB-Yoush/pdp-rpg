@@ -3,9 +3,9 @@ class_name Action
 signal finished
 
 
-var _data
+var _data:ActionData
 var _actor:Battler
-var _targets := []
+var _targets :Array[Battler]= []
 
     
 
@@ -13,6 +13,13 @@ func _init(data:ActionData,actor:Battler,targets) -> void:
     _data = data
     _actor = actor
     _targets = targets
+
+    if _data.color_cost[Types.ColorCost.RE] > 0:
+        _data.color_used = Types.ColorCost.RE
+    elif _data.color_cost[Types.ColorCost.GR] > 0:
+        _data.color_used = Types.ColorCost.GR
+    else:
+        _data.color_used = null
 
 # Applies the action on the targets, using the actor's stats.
 # Returns `true` if the action succeeded.
@@ -31,11 +38,7 @@ func targets_opponents() -> bool:
     return true
 
 func get_energy_cost() -> int:
-    if _data.red_cost == 0:
-        return _data.green_cost
-    elif _data.green_cost == 0:
-        return _data.red_cost
-    else:
-        return 0
-
+    # only one color or another, no fusion attacks yet.
+    # one will be 0 and that's the one it dosen't use, 
+    return max(_data.color_cost[Types.ColorCost.RE],_data.color_cost[Types.ColorCost.GR])
 

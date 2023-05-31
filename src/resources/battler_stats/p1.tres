@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BattlerStats" load_steps=2 format=3 uid="uid://uioustulufim"]
+
+[ext_resource type="Script" path="res://src/battlers/battler_stats.gd" id="1_cy3mm"]
+
+[resource]
+script = ExtResource("1_cy3mm")
+max_health = 20
+name = "p1"
+weaknesses = []
+affinity = 0
+base_attack = 10
+base_defence = 10
+base_speed = 10
+base_hit_chance = 10
+base_evasion = 10

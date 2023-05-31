@@ -14,7 +14,6 @@ party members are stored in an array and thier turns are called
 
 """
 
-enum ACTIONTYPE {ATTACK,HEAL,BUFF,DEBUFF}
 enum STATES {PUZZLE,TURN}
 var _state = STATES.TURN
 var _party_members :Array[Battler]= []
@@ -42,10 +41,11 @@ func _play_turn(battler:Battler):
 	# hard coding interaction for now
 	#print(battler.stats.health)
 	var targets = [_party_members[0]]
-	var action_data :ActionData = load("res://src/resources/modifier_actions/buff_atk.tres")
+	var action_data :ActionData = load("res://src/resources/modifier_actions/default_attack.tres")
 	var action:= ActionFactory.new_action(action_data,battler,targets)
-	battler.act(action)
-	await battler.action_finished
+	if action._data.can_be_used_by(battler): 
+		battler.act(action)
+		await battler.action_finished
 	pass
 
 ## when an action block counts down
@@ -54,7 +54,7 @@ func _play_turn(battler:Battler):
 	#pass
 	
 func end_turn():
-	for battler in battlers: battler.turn_ended()
+	for battler in battlers: battler.end_turn()
 	_state = STATES.PUZZLE
 	start_puzzle()
 
@@ -70,7 +70,7 @@ func make_opponent_actions(_active_opponents:Array[Battler]):
 	#loop thru every opponent and...
 	var battler = _active_opponents[0] #hard code for testing
 	var targets = [_party_members[0]] #hard coded
-	var basicAttack :AttackActionData = load("res://src/resources/attack_actions/basic_attack.tres")
+	var basicAttack :AttackActionData = load("res://src/resources/attack_actions/default_attack.tres")
 	var action:= ActionFactory.new_action(basicAttack,battler,targets)
 	var action_array :Array[Action]= [action]
 	#might be better to route thru puzzle game node

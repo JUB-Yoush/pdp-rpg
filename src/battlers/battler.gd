@@ -7,6 +7,7 @@ class_name Battler
 @export var actions:Array[ActionData]
 @export var is_party_member:= true
 var acted:bool = false
+var turn_ended:bool = false
 var is_active:bool = true
 
 signal selection_toggled(value)
@@ -62,31 +63,31 @@ func act(action:Action) -> void:
 	#if not is_player_controlled():
 		##skip checking energy
 
-	#energy won't be stored in indivisual party members
 	remove_energy(action)
 	await action.apply_async()
 	#if is_active: 
 		#set_process(true)
 	action_finished.emit()
 
-func turn_ended():
+func turn_end(): # runs after a pm has manually ended turn
 
 	stats.tick_modifiers()
-	# also get hit by status effects or somthing idk
-	var puzzle_points = get_parent().get_parent().puzzle_points
-	puzzle_points[Types.ColorCost.RE] = stats.red_points  
-	puzzle_points[Types.ColorCost.GR] = stats.green_points  
-	get_parent().get_parent().puzzle_points = puzzle_points
 
-func turn_started():
+	# give back the puzzle points as we've modified them.
+	var puzzle_points = get_parent().get_parent().puzzle_points
+	puzzle_points[Types.ColorCost.RE] = stats.energy[Types.ColorCost.RE]
+	puzzle_points[Types.ColorCost.RE] = stats.energy[Types.ColorCost.GR]
+	get_parent().get_parent().puzzle_points = puzzle_points
+	turn_ended = true
+
+func turn_start():
 	var puzzle_points = get_parent().get_parent().puzzle_points
 	stats.red_points = puzzle_points[Types.ColorCost.RE]
 	stats.green_points = puzzle_points[Types.ColorCost.GR]
 
 
-func remove_energy(action):
-	var cost = action.get_energy_cost()
-	if action._data.red_cost == 0:
-		stats.green_energy -= cost 
-	if action._data.green_cost == 0:
-		stats.red_energy -= cost 
+func remove_energy(action:Action):
+	#var cost = action.get_energy_cost()
+	var color = action._data.color_used
+	stats.energy[color] -= action._data.energy_cost[color]
+	

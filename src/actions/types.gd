@@ -10,4 +10,6 @@ const WEAKNESS_MAPPING = {
     Elements.PAPER: Elements.ROCK
 }
 enum ActionType {ATTACK,HEAL,MODIFIER}
-enum ColorCost {RE,GR}
+
+# Red, Green, Free
+enum ColorCost {RE,GR,FR}

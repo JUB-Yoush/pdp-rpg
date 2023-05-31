@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BattlerStats" load_steps=2 format=3 uid="uid://dvofq5wbxcrbe"]
+
+[ext_resource type="Script" path="res://src/battlers/battler_stats.gd" id="1_ol0ap"]
+
+[resource]
+script = ExtResource("1_ol0ap")
+max_health = 20
+name = "e1"
+weaknesses = []
+affinity = 0
+base_attack = 10
+base_defence = 10
+base_speed = 10
+base_hit_chance = 10
+base_evasion = 10

@@ -14,8 +14,10 @@ signal health_changed(old_value,new_value)
 # The battler's elemental affinity. Gives bonuses with related actions.
 @export var affinity = Types.Elements.NONE
 
-var red_energy:int
-var green_energy:int
+var energy = {
+	Types.ColorCost.RE:0,
+	Types.ColorCost.GR:0,
+}
 
 var health := max_health:
 	set(new_value):
