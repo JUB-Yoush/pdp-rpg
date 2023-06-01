@@ -49,6 +49,16 @@ script = ExtResource("2_04bfm")
 stats = ExtResource("4_useah")
 actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_ow76w")])
 
+[node name="PlayerBattler2" type="Node2D" parent="CombatManager/Battlers"]
+script = ExtResource("2_04bfm")
+stats = ExtResource("4_useah")
+actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_ow76w")])
+
+[node name="PlayerBattler3" type="Node2D" parent="CombatManager/Battlers"]
+script = ExtResource("2_04bfm")
+stats = ExtResource("4_useah")
+actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_ow76w")])
+
 [node name="EnemyBattler" type="Node2D" parent="CombatManager/Battlers"]
 script = ExtResource("2_04bfm")
 stats = ExtResource("6_pd0sd")
@@ -56,6 +66,12 @@ actions = Array[Resource("res://src/actions/action_data.gd")]([SubResource("Reso
 is_party_member = false
 
 [node name="EnemyBattler2" type="Node2D" parent="CombatManager/Battlers"]
+script = ExtResource("2_04bfm")
+stats = ExtResource("6_pd0sd")
+actions = Array[Resource("res://src/actions/action_data.gd")]([SubResource("Resource_mr8fs")])
+is_party_member = false
+
+[node name="EnemyBattler3" type="Node2D" parent="CombatManager/Battlers"]
 script = ExtResource("2_04bfm")
 stats = ExtResource("6_pd0sd")
 actions = Array[Resource("res://src/actions/action_data.gd")]([SubResource("Resource_mr8fs")])

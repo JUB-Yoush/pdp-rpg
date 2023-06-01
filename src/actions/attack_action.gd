@@ -6,11 +6,11 @@ class_name AttackAction
 
 # We calculate and store hits in an array to consume later, in sync with the
 # animation.
-var _hits := []
+var _hits :Array[Hit]= []
 
 # We must override the constructor to use it.
 # Notice how _init() uses a unique notation to call the parent's constructor.
-func _init(data: AttackActionData, actor:Battler, targets: Array):
+func _init(data: AttackActionData, actor:Battler, targets: Array[Battler]):
 	super(data, actor, targets)
 	
 
@@ -28,6 +28,7 @@ func apply_async() -> bool:
 		var damage := calculate_potential_damage_for(target)
 		var hit := Hit.new(damage, hit_chance)
 		# We're going to define a new function on the battler so it takes hits.
+		print("taking hit")
 		target.take_hit(hit)
 	# Our method is supposed to be a coroutine, that is to say, it pauses
 	# execution and ends after some time.

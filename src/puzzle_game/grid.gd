@@ -32,7 +32,7 @@ func _ready() -> void:
 	pieceFactory = get_parent().get_node("PieceFactory")
 	x_start = get_viewport_rect().size.x/2 - (offset * width/2)
 	y_start = offset * (height + 2) 
-	seed(4)
+	#seed(4)
 	#randomize()
 	destroyTimer = get_parent().get_node("DestoryTimer")
 	collapseTimer = get_parent().get_node("CollapseTimer")

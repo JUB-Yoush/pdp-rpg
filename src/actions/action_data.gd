@@ -15,8 +15,8 @@ enum ActionType {ATTACK,HEAL,MODIFIER}
 var type:ActionType
 
 @export var color_cost:Dictionary = {
-    Types.ColorCost.RE:0,
-    Types.ColorCost.GR:0
+	Types.ColorCost.RE:0,
+	Types.ColorCost.GR:0
 }
 
 var color_used:Types.ColorCost
@@ -27,7 +27,8 @@ var color_used:Types.ColorCost
 @export var is_targeting_all := false
 
 func can_be_used_by(battler:Battler) -> bool:
-    return color_cost[color_used] <= battler.stats.energy[color_used]
+	prints(color_cost[color_used],battler.stats.energy[color_used])
+	return color_cost[color_used] <= battler.stats.energy[color_used]
 
 
 

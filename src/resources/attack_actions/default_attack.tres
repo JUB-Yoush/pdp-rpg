@@ -7,10 +7,7 @@ script = ExtResource("1_5kob3")
 damage_multiplier = 1.0
 hit_chance = 100.0
 label = "action placeholder text"
-energy_cost = null
 element = 0
-red_cost = null
-green_cost = null
 color_cost = {
 0: 10,
 1: 0

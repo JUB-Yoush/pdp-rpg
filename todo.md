@@ -29,6 +29,8 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 - add bad Ai for enemies to select actions (weighted randomization)
 - ko/negative hp state for pm
 
+
+
 - add Ui for users to select their actions and targets
 - heal party in between fights
 - create content

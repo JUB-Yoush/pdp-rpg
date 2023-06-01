@@ -4,14 +4,14 @@ class_name PuzzleGame
 enum TYPE {RE,BL,GR,YE,PR,EM}
 #manage points, timer, and state transitions 
 var puzzle_points = {
-		TYPE.RE:0,
+		TYPE.RE:200,
 		TYPE.BL:0,
 		TYPE.GR:0,
 		TYPE.YE:0,
 		TYPE.PR:0}
 
 var is_puzzling = true
-var puzzle_time = 10
+var puzzle_time = 2
 
 signal done_puzzling(puzzle_points,ready_action_pieces)
 
@@ -52,7 +52,6 @@ func add_puzzle_points(added_puzzle_points:Dictionary):
 	var extra_time :=0.0
 	if added_puzzle_points.values() == [0,0,0,0,0]:
 		return
-	print(added_puzzle_points)
 	for key in added_puzzle_points.keys():
 		# any pieces after 3 are worth x2
 		var points:int = added_puzzle_points[key]

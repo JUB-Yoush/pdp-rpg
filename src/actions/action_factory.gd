@@ -1,7 +1,7 @@
 class_name ActionFactory
 
 enum ActionType {ATTACK,HEAL,MODIFIER}
-static func new_action(action_data, actor, target) -> Action:
+static func new_action(action_data:ActionData, actor:Battler, target:Array[Battler]) -> Action:
 	match(action_data.type):
 		ActionType.ATTACK:	
 			return AttackAction.new(action_data, actor, target)

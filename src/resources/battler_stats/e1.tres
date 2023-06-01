@@ -11,5 +11,5 @@ affinity = 0
 base_attack = 10
 base_defence = 10
 base_speed = 10
-base_hit_chance = 10
-base_evasion = 10
+base_hit_chance = 100
+base_evasion = 0

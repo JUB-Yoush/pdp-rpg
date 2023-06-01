@@ -18,7 +18,14 @@ enum STATES {PUZZLE,TURN}
 var _state = STATES.TURN
 var _party_members :Array[Battler]= []
 var _opponents :Array[Battler]= []
-var puzzle_points
+enum TYPE {RE,BL,GR,YE,PR,EM}
+#manage points, timer, and state transitions 
+var puzzle_points = {
+		TYPE.RE:50,
+		TYPE.BL:0,
+		TYPE.GR:50,
+		TYPE.YE:0,
+		TYPE.PR:0}
 var grid:Grid 
 @onready var puzzleGame := $PuzzleGame
 @onready var battlers := $Battlers.get_children()
@@ -33,20 +40,20 @@ func _ready() -> void:
 		else:
 			_opponents.append(battler)
 	
-	#end_turn()
-	_play_turn(_party_members[0])
+	end_turn()
+	#_play_turn(_party_members[0])
 
 func _play_turn(battler:Battler):
 	# this is where the battler would pick thier action and target
 	# hard coding interaction for now
 	#print(battler.stats.health)
-	var targets = [_party_members[0]]
-	var action_data :ActionData = load("res://src/resources/modifier_actions/default_attack.tres")
-	var action:= ActionFactory.new_action(action_data,battler,targets)
+	battler.turn_start()
+	var targets :Array[Battler]= [_party_members[0]]
+	var actionData :AttackActionData = battler.actions[0]
+	var action:= ActionFactory.new_action(actionData,battler,targets)
 	if action._data.can_be_used_by(battler): 
 		battler.act(action)
 		await battler.action_finished
-	pass
 
 ## when an action block counts down
 #func play_opponent_action(action:Action):
@@ -54,7 +61,7 @@ func _play_turn(battler:Battler):
 	#pass
 	
 func end_turn():
-	for battler in battlers: battler.end_turn()
+	for battler in battlers: battler.turn_end()
 	_state = STATES.PUZZLE
 	start_puzzle()
 
@@ -68,10 +75,10 @@ func start_puzzle():
 
 func make_opponent_actions(_active_opponents:Array[Battler]):
 	#loop thru every opponent and...
-	var battler = _active_opponents[0] #hard code for testing
-	var targets = [_party_members[0]] #hard coded
-	var basicAttack :AttackActionData = load("res://src/resources/attack_actions/default_attack.tres")
-	var action:= ActionFactory.new_action(basicAttack,battler,targets)
+	var battler :Battler = _active_opponents[0] #hard code for testing
+	var targets :Array[Battler]= [_party_members[0]] #hard coded
+	var actionData :ActionData = battler.actions[0]
+	var action:= ActionFactory.new_action(actionData,battler,targets)
 	var action_array :Array[Action]= [action]
 	#might be better to route thru puzzle game node
 	grid.add_rows_with_actions(_active_opponents.size(),action_array)
@@ -104,6 +111,24 @@ func start_turn(enemy_action_pieces):
 	pass
 
 func start_party_turn():
+	for battler in _party_members:
+		if !battler.is_active:
+			continue
+		battler.turn_start()
+		for i in 2:
+			# just auto pick first target and first aciton for now
+			var actionData :ActionData= battler.actions[0]
+			var target :Array[Battler]= [_opponents[0]]
+			var action:Action = ActionFactory.new_action(actionData,battler,target)
+
+			if action._data.can_be_used_by(battler): 
+				battler.act(action)
+				await battler.action_finished
+			
+		battler.turn_end()
+				
+				
+		
 	# loop through all our party members
 	# sort them by speed stat
 	# play_turn for each of them
