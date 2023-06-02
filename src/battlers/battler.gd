@@ -14,6 +14,7 @@ signal selection_toggled(value)
 signal damage_taken(amount)
 signal action_finished
 signal hit_missed
+signal turn_passed
 
 func take_hit(hit:Hit)-> void:
 	print("taking hit")
@@ -72,7 +73,7 @@ func act(action:Action) -> void:
 	action_finished.emit()
 
 func turn_end(): # runs after a pm has manually ended turn
-
+	print('MANUAL TURN ENDING LIKE GOD INTENDED')
 	stats.tick_modifiers()
 
 	# give back the puzzle points as we've modified them.
@@ -80,6 +81,7 @@ func turn_end(): # runs after a pm has manually ended turn
 	puzzle_points[Types.ColorCost.RE] = stats.energy[Types.ColorCost.RE]
 	puzzle_points[Types.ColorCost.GR] = stats.energy[Types.ColorCost.GR]
 	get_parent().get_parent().puzzle_points = puzzle_points
+	turn_passed.emit()
 	turn_ended = true
 
 func turn_start():

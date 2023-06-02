@@ -29,10 +29,13 @@ var puzzle_points = {
 var grid:Grid 
 @onready var puzzleGame := $PuzzleGame
 @onready var battlers := $Battlers.get_children()
+var UI
+var UIActionMenuScene = preload("res://src/ui/ui_action_list.tscn")
 
 
 func _ready() -> void:
 	grid = puzzleGame.get_node("Grid")
+	UI = get_parent().get_node("UI")
 	puzzleGame.done_puzzling.connect(end_puzzle)
 	for battler in battlers:
 		if battler.is_party_member:
@@ -48,25 +51,29 @@ func _play_turn(battler:Battler):
 	# hard coding interaction for now
 	#print(battler.stats.health)
 	battler.turn_start()
-	var targets :Array[Battler]= [_party_members[0]]
-	var actionData :AttackActionData = battler.actions[0]
-	var action:= ActionFactory.new_action(actionData,battler,targets)
-	if action._data.can_be_used_by(battler): 
+	print("play turn")
+	while !battler.turn_ended:
+		
+		var targets :Array[Battler]= [_party_members[0]]
+		var actionData :ActionData = await _player_select_action_async(battler)
+
+		var action:= ActionFactory.new_action(actionData,battler,targets)
+		
 		battler.act(action)
 		await battler.action_finished
+	
+	
 
-## when an action block counts down
-#func play_opponent_action(action:Action):
-	#action._actor.act(action)
-	#pass
 	
 func end_turn():
-	for battler in battlers: battler.turn_end()
+	print("rpg phase over")
+	#for battler in battlers: battler.turn_end()
 	_state = STATES.PUZZLE
 	start_puzzle()
 
 
 func start_puzzle():
+	puzzleGame.visible = true
 	var _active_opponents :Array[Battler]= [_opponents[0]]
 	make_opponent_actions(_active_opponents)
 	puzzleGame.start_puzzling()
@@ -86,6 +93,7 @@ func make_opponent_actions(_active_opponents:Array[Battler]):
 func end_puzzle(new_puzzle_points,ready_action_pieces:Array[ActionPiece]):
 	# passed in is a dictonary of all points made from the puzzle phase as well as actions to call before the player can act
 	_state = STATES.TURN
+	puzzleGame.visible = false
 	puzzle_points = new_puzzle_points
 	start_turn(ready_action_pieces)
 
@@ -96,6 +104,7 @@ func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
 		enemy.act(actionPiece.action)
 		await enemy.action_finished
 		actionPiece.action_preformed.emit()
+		enemy.turn_end()
 
 func start_turn(enemy_action_pieces):
 	start_enemy_turn(enemy_action_pieces)
@@ -114,18 +123,8 @@ func start_party_turn():
 	for battler in _party_members:
 		if !battler.is_active:
 			continue
-		battler.turn_start()
-		for i in 2:
-			# just auto pick first target and first aciton for now
-			var actionData :ActionData= battler.actions[0]
-			var target :Array[Battler]= [_opponents[0]]
-			var action:Action = ActionFactory.new_action(actionData,battler,target)
-
-			if action._data.can_be_used_by(battler): 
-				battler.act(action)
-				await battler.action_finished
-			
-		battler.turn_end()
+		_play_turn(battler)
+		await battler.turn_passed
 				
 				
 		
@@ -137,6 +136,18 @@ func start_party_turn():
 
 
 	pass
+
+func _player_select_action_async(battler) -> ActionData:
+	var actionMenu:UIActionMenu = UIActionMenuScene.instantiate()
+	UI.add_child(actionMenu)
+	actionMenu.setup(battler)
+	actionMenu.focus()
+	var action_data:ActionData = await actionMenu.action_selected
+	UI.action_menu.queue_free()
+	return action_data
+
+func _player_select_targets_async(_action:ActionData,opponents:Array[Battler]) -> Array[Battler]:
+	return []
 
 
 func _input(event: InputEvent) -> void:

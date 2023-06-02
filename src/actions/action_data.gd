@@ -7,7 +7,8 @@ enum ActionType {ATTACK,HEAL,MODIFIER}
 
 @export var icon: Texture
 @export var label: = "action placeholder text"
-
+@export var description: = "10 RED: This is what this action does."
+var is_turn_ender:bool = false
 
 @export var element: Elements
 

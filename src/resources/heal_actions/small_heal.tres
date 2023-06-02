@@ -1,14 +1,16 @@
-[gd_resource type="Resource" script_class="HealActionData" load_steps=2 format=3 uid="uid://di5hk44kbjxes"]
+[gd_resource type="Resource" script_class="HealActionData" load_steps=2 format=3 uid="uid://c60v2dntwc3gc"]
 
 [ext_resource type="Script" path="res://src/actions/heal_action_data.gd" id="1_l2bxp"]
 
 [resource]
 script = ExtResource("1_l2bxp")
 recovery_multiplier = 0.25
-label = "heal 25% of a targets HP"
-energy_cost = 10
+label = "heal 25%"
 element = 0
-color_cost = 1
-countdown_time = 2
+color_cost = {
+0: 0,
+1: 10
+}
+countdown_time = 1
 is_targeting_self = false
 is_targeting_all = false

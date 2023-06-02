@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cx4wa4flc30g4" path="res://src/ui/ui_action_button.tscn" id="1_mibb5"]
 [ext_resource type="Script" path="res://src/ui/ui_action_list.gd" id="1_rat00"]
 
-[node name="VBoxContainer" type="VBoxContainer"]
+[node name="UIActionMenu" type="VBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_rat00")

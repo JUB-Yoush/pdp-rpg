@@ -41,4 +41,3 @@ func get_energy_cost() -> int:
 	# only one color or another, no fusion attacks yet.
 	# one will be 0 and that's the one it dosen't use, 
 	return max(_data.color_cost[Types.ColorCost.RE],_data.color_cost[Types.ColorCost.GR])
-

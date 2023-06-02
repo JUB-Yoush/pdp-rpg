@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf2l2kg3ti11d"]
+
+[ext_resource type="PackedScene" uid="uid://cx4wa4flc30g4" path="res://src/ui/ui_action_button.tscn" id="1_aucrl"]
+[ext_resource type="Script" path="res://src/ui/ui_pass_button.gd" id="2_vetuc"]
+
+[node name="UIActionButton" instance=ExtResource("1_aucrl")]
+script = ExtResource("2_vetuc")
+
+[node name="Label" parent="HBoxContainer" index="1"]
+text = "PASS"

@@ -1,16 +1,18 @@
-[gd_resource type="Resource" script_class="ModifierActionData" load_steps=2 format=3 uid="uid://cbnsj35kiwdch"]
+[gd_resource type="Resource" script_class="ModifierActionData" load_steps=2 format=3 uid="uid://beqrnkm1p53eq"]
 
-[ext_resource type="Script" path="res://src/actions/modifier_action_data.gd" id="1_osaxf"]
+[ext_resource type="Script" path="res://src/actions/modifier_action_data.gd" id="1_2mgp8"]
 
 [resource]
-script = ExtResource("1_osaxf")
+script = ExtResource("1_2mgp8")
 stat_name = "attack"
 length = 3
 value = 5.0
-label = "boost attack for 3 turns"
-energy_cost = 7
+label = "buff atk +5"
 element = 0
-color_cost = 1
-countdown_time = 2
+color_cost = {
+0: 0,
+1: 10
+}
+countdown_time = 1
 is_targeting_self = false
 is_targeting_all = false
