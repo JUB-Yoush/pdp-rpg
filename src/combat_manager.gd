@@ -143,7 +143,8 @@ func _player_select_action_async(battler) -> ActionData:
 	actionMenu.setup(battler)
 	actionMenu.focus()
 	var action_data:ActionData = await actionMenu.action_selected
-	UI.action_menu.queue_free()
+	print("action chosen is ", action_data.label)
+	actionMenu.queue_free()
 	return action_data
 
 func _player_select_targets_async(_action:ActionData,opponents:Array[Battler]) -> Array[Battler]:

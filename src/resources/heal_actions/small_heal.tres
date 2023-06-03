@@ -6,6 +6,7 @@
 script = ExtResource("1_l2bxp")
 recovery_multiplier = 0.25
 label = "heal 25%"
+description = "10 RED: This is what this action does."
 element = 0
 color_cost = {
 0: 0,

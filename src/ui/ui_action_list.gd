@@ -29,8 +29,8 @@ func setup(battler:Battler) -> void:
 		var actionButton = UIActionButton.instantiate()
 		add_child(actionButton)
 		actionButton.setup(action,can_use_action)
-		actionButton.pressed.connect(_on_UIActionButton_button_pressed)
-		actionButton.focus_entered.connect(_on_UIActionButton_focus_entered)
+		actionButton.pressed.connect(_on_UIActionButton_button_pressed.bind(action))
+		actionButton.focus_entered.connect(_on_UIActionButton_focus_entered.bind(actionButton))
 	var UIPassButton:UIPassButton = UIPassButtonScene.instantiate() 
 	UIPassButton.pass_button_pressed.connect(battler.turn_end)
 	add_child(UIPassButton)
@@ -51,11 +51,11 @@ func setup(battler:Battler) -> void:
 
 func focus() -> void:
 	buttons[0].grab_focus()
-	buttons[0].focus_entered.emit(buttons[0])
+	#buttons[0].focus_entered.emit(buttons[0])
 
 func _on_UIActionButton_focus_entered(button:UIActionButton) -> void:
-	print(button)
 	button.grab_focus()
+	
 
 func _on_UIActionButton_button_pressed(action: ActionData) -> void:
 	is_disabled = false

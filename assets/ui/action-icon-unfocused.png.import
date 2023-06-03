@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://wn80cpp5hhyj"
-path="res://.godot/imported/action-icon.png-53181384b9c5fddcad1a4501b613090e.ctex"
+uid="uid://bcyti5ecis1wb"
+path="res://.godot/imported/action-icon-unfocused.png-d52006a08e9387e097fe97cf44fd58f6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/action-icon.png"
-dest_files=["res://.godot/imported/action-icon.png-53181384b9c5fddcad1a4501b613090e.ctex"]
+source_file="res://assets/ui/action-icon-unfocused.png"
+dest_files=["res://.godot/imported/action-icon-unfocused.png-d52006a08e9387e097fe97cf44fd58f6.ctex"]
 
 [params]
 

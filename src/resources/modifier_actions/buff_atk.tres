@@ -8,6 +8,7 @@ stat_name = "attack"
 length = 3
 value = 5.0
 label = "buff atk +5"
+description = "10 RED: This is what this action does."
 element = 0
 color_cost = {
 0: 0,
