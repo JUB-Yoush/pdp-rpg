@@ -6,7 +6,7 @@ enum TYPE {RE,BL,GR,YE,PR,EM}
 var puzzle_points = {
 		TYPE.RE:200,
 		TYPE.BL:0,
-		TYPE.GR:0,
+		TYPE.GR:200,
 		TYPE.YE:0,
 		TYPE.PR:0}
 

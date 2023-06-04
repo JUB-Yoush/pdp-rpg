@@ -24,8 +24,9 @@ func setup(action:ActionData,can_be_used:bool) -> void:
 
 	#we will tell the button if the action can be used or not
 	disabled = not can_be_used
-	_label_node.modulate = disabled_color
-	_icon_node.texture = load(disabled_icon)
+	if disabled:
+		_label_node.modulate = disabled_color
+		_icon_node.texture = load(disabled_icon)
 
 func _ready() -> void:
 	pressed.connect(_on_pressed)
@@ -37,10 +38,11 @@ func _on_pressed() -> void:
 	release_focus()
 
 func display_focus():
+	print(focus_mode)
 	if disabled == false:
 		_label_node.modulate = focused_color
 		_icon_node.texture = load(focused_icon)
-		
+
 
 func display_unfocus():
 	if disabled == false:

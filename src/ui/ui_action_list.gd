@@ -31,29 +31,19 @@ func setup(battler:Battler) -> void:
 		actionButton.setup(action,can_use_action)
 		actionButton.pressed.connect(_on_UIActionButton_button_pressed.bind(action))
 		actionButton.focus_entered.connect(_on_UIActionButton_focus_entered.bind(actionButton))
+	# add option to end turn
 	var UIPassButton:UIPassButton = UIPassButtonScene.instantiate() 
 	UIPassButton.pass_button_pressed.connect(battler.turn_end)
 	add_child(UIPassButton)
 	buttons = get_children()
 
 
-	#for action in battler.actions:
-		#var can_use_action:bool = action.can_be_used_by(battler)
-		#var actionButton = UIActionButton.instantiate()
-		#add_child(actionButton)
-		#actionButton.setup(action,can_use_action)
-		#actionButton.pressed.connect(_on_UIActionButton_button_pressed)
-		#actionButton.focus_entered.connect(_on_UIActionButton_focus_entered)
-	#add_child(UIPassButton)
-	#buttons = get_children()
-
-
 
 func focus() -> void:
 	buttons[0].grab_focus()
-	#buttons[0].focus_entered.emit(buttons[0])
 
 func _on_UIActionButton_focus_entered(button:UIActionButton) -> void:
+	print('_on_UIActionButton_focus_entered')
 	button.grab_focus()
 	
 
