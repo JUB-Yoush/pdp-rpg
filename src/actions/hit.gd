@@ -7,11 +7,11 @@ var hit_chance: float
 
 
 func _init(_damage: int, _hit_chance := 100.0) -> void:
-    damage = _damage
-    hit_chance = _hit_chance
+	damage = _damage
+	hit_chance = _hit_chance
 
 
 # Returns true if the hit isn't missing. To use when consuming the hit.
 func does_hit() -> bool:
-    prints(hit_chance,randf() * 100.0)
-    return randf() * 100.0 < hit_chance
+	prints(hit_chance,randf() * 100.0)
+	return randf() * 100.0 < hit_chance

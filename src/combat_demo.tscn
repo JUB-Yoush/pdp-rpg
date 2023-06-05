@@ -52,6 +52,11 @@ script = ExtResource("2_04bfm")
 stats = ExtResource("4_useah")
 actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_ow76w"), ExtResource("6_b0wtg"), ExtResource("7_ibfkj")])
 
+[node name="PlayerBattler3" type="Node2D" parent="CombatManager/Battlers"]
+script = ExtResource("2_04bfm")
+stats = ExtResource("4_useah")
+actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_ow76w"), ExtResource("6_b0wtg"), ExtResource("7_ibfkj")])
+
 [node name="EnemyBattler" type="Node2D" parent="CombatManager/Battlers"]
 script = ExtResource("2_04bfm")
 stats = ExtResource("6_pd0sd")

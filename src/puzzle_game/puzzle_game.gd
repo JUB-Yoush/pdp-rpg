@@ -26,7 +26,7 @@ func _ready() -> void:
 	puzzleTimer.timeout.connect(puzzle_timer_timeout)
 	grid.cleared_lines.connect(add_puzzle_points)
 
-func start_puzzling() -> void:
+func start_puzzling(used_action_pieces:Array[ActionPiece]) -> void:
 	is_puzzling = true
 	puzzleTimer.start(puzzle_time)
 	#make the grid visible and movable or whatever

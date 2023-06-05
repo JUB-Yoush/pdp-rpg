@@ -31,7 +31,7 @@ var grid:Grid
 @onready var battlers := $Battlers.get_children()
 var UI
 var UIActionMenuScene = preload("res://src/ui/ui_action_list.tscn")
-
+var usedActionPieces :Array[ActionPiece] 
 
 func _ready() -> void:
 	grid = puzzleGame.get_node("Grid")
@@ -54,7 +54,7 @@ func _play_turn(battler:Battler):
 	print("play turn")
 	while !battler.turn_ended:
 		
-		var targets :Array[Battler]= [_party_members[0]]
+		var targets :Array[Battler]= [_opponents[0]]
 		var actionData :ActionData = await _player_select_action_async(battler)
 
 		var action:= ActionFactory.new_action(actionData,battler,targets)
@@ -125,6 +125,11 @@ func start_party_turn():
 			continue
 		_play_turn(battler)
 		await battler.turn_passed
+		print("does ui exist? ",UI.get_node('UIActionMenu') != null)
+		if UI.get_node("UIActionMenu") != null:
+			UI.remove_child(UI.get_node("UIActionMenu"))
+			pass
+	#print('okay all done loop')
 				
 				
 		

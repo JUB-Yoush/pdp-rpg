@@ -6,6 +6,7 @@ class_name Battler
 @export var ui_data:BattlerUIData
 @export var actions:Array[ActionData]
 @export var is_party_member:= true
+
 var acted:bool = false
 var turn_ended:bool = false
 var is_active:bool = true

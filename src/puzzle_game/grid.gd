@@ -60,7 +60,6 @@ func insert_action_piece(col,row,actionPiece):
 	if !grid_array[col][row].empty:
 		push_error("insering action piece in non-empty spot")
 	add_child(actionPiece)
-	#actionPiece.countdown_finished.connect(action_countdown_finished)
 	grid_array[col][row] = actionPiece
 	actionPiece.col = col
 	actionPiece.row = row
@@ -303,31 +302,12 @@ func collect_matches() -> Dictionary:
 				matches[grid_array[col][row].type] += 1	
 	return matches
 
-#func recursive_match_check(col,row):
-	##var current_piece:Piece= grid_array[col][row] 
-	#if checked_pieces.has(grid_array[col][row]):
-		#return 0
-
-	## if it's within the grid, matched, and the types are the same
-	#if col +1 <= width and grid_array[col +1][row].matched and grid_array[col][row].type == grid_array[col +1][row].type:
-		#return recursive_match_check(col+1,row) + 1
-
-	#if col -1 >= width and grid_array[col -1][row].matched and grid_array[col][row].type == grid_array[col -1][row].type:
-		#return recursive_match_check(col-1,row) + 1
-
-	#if row +1 <= height and grid_array[col][row +1].matched and grid_array[col][row].type == grid_array[col][row +1].type:
-		#return recursive_match_check(col,row+1) + 1
-
-	#if row +1 <= height and grid_array[col][row -1].matched and grid_array[col][row].type == grid_array[col][row -1].type:
-		#return recursive_match_check(col,row-1) + 1
-	#else:
-		#return 1
 
 func action_countdown_finished(actionPiece:ActionPiece):
 	actionPiece.dim()
-	await actionPiece.action_preformed
-	change_to_empty(actionPiece.col,actionPiece.row)
-	collapseTimer.start(cleardrop_delay)
+	#await actionPiece.action_preformed
+	#change_to_empty(actionPiece.col,actionPiece.row)
+	#collapseTimer.start(cleardrop_delay)
 
 
 
