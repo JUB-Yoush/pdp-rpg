@@ -37,12 +37,7 @@ func _ready() -> void:
 	grid = puzzleGame.get_node("Grid")
 	UI = get_parent().get_node("UI")
 	puzzleGame.done_puzzling.connect(end_puzzle)
-	for battler in battlers:
-		if battler.is_party_member:
-			_party_members.append(battler)
-		else:
-			_opponents.append(battler)
-	
+	battle_start()
 	end_turn()
 	#_play_turn(_party_members[0])
 
@@ -62,7 +57,14 @@ func _play_turn(battler:Battler):
 		battler.act(action)
 		await battler.action_finished
 	
-	
+func battle_start():
+	# make battler portraits
+	for battler in battlers:
+		if battler.is_party_member:
+			_party_members.append(battler)
+		else:
+			_opponents.append(battler)
+	pass	
 
 	
 func end_turn():
@@ -145,9 +147,6 @@ func start_party_turn():
 
 func _player_select_action_async(battler) -> ActionData:
 	var actionMenu:UIActionMenu = UIActionMenuScene.instantiate()
-	var x_start = get_viewport_rect().size.x/2 - (134/2)
-	var y_start = 150
-	actionMenu.position = Vector2(x_start,y_start)
 	UI.add_child(actionMenu)
 	actionMenu.setup(battler)
 	actionMenu.focus()

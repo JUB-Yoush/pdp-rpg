@@ -37,7 +37,10 @@ func setup(battler:Battler) -> void:
 	add_child(UIPassButton)
 	buttons = get_children()
 
-
+func _ready() -> void:
+	var x_start = get_viewport_rect().size.x/2 - (134/2)
+	var y_start = 100
+	position = Vector2(x_start,y_start)
 
 func focus() -> void:
 	buttons[0].grab_focus()

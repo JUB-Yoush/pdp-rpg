@@ -33,6 +33,9 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 
 - action ui:
 	- make
+
+- add battler boxes for each battler in the fight
+- work on async selection function
 - add Ui for users to select their actions and targets
 - heal party in between fights
 - create content

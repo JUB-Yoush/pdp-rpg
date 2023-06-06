@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dg0frypjhsr8x"]
+[gd_scene load_steps=14 format=3 uid="uid://dg0frypjhsr8x"]
 
 [ext_resource type="Script" path="res://src/combat_manager.gd" id="1_fjji6"]
 [ext_resource type="Texture2D" uid="uid://bqea1t7dreb25" path="res://assets/bg5.png" id="1_p1xa0"]
@@ -11,6 +11,7 @@
 [ext_resource type="Resource" uid="uid://dvofq5wbxcrbe" path="res://src/resources/battler_stats/e1.tres" id="6_pd0sd"]
 [ext_resource type="Resource" uid="uid://beqrnkm1p53eq" path="res://src/resources/modifier_actions/buff_atk.tres" id="7_ibfkj"]
 [ext_resource type="PackedScene" uid="uid://dafgs0noum5tk" path="res://src/ui/ui_battler_box.tscn" id="11_1gb7u"]
+[ext_resource type="PackedScene" uid="uid://b4j888tqjdun1" path="res://src/ui/textbox.tscn" id="11_2phws"]
 
 [sub_resource type="Resource" id="Resource_mr8fs"]
 script = ExtResource("4_soups")
@@ -81,8 +82,20 @@ is_party_member = false
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+
+[node name="Textbox" parent="UI" instance=ExtResource("11_2phws")]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 175.0
+offset_top = 254.0
+offset_right = 463.0
+offset_bottom = 351.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="UIBattlerBox" parent="UI" instance=ExtResource("11_1gb7u")]
 layout_mode = 0
