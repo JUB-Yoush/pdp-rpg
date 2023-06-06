@@ -2,8 +2,8 @@ extends TextureButton
 class_name UIActionButton
 
 const focused_color := 'ffffeb'
-const unfocued_color := '43434f'
-const disabled_color := "c2c2d1"
+const unfocued_color := 'c2c2d1'
+const disabled_color := '43434f'
 
 const focused_icon := "res://assets/ui/action-icon-focused.png"
 const unfocused_icon := "res://assets/ui/action-icon-unfocused.png"
@@ -19,7 +19,7 @@ func setup(action:ActionData,can_be_used:bool) -> void:
 
 	# Only update the icon's texture if the action data inlcudes an icon.
 	if action.icon:
-		_icon_node.texture = action.icon
+		_icon_node.texture = load(unfocused_icon)
 	_label_node.text = action.label
 
 	#we will tell the button if the action can be used or not

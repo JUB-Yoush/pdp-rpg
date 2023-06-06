@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://dg0frypjhsr8x"]
+[gd_scene load_steps=13 format=3 uid="uid://dg0frypjhsr8x"]
 
 [ext_resource type="Script" path="res://src/combat_manager.gd" id="1_fjji6"]
 [ext_resource type="Texture2D" uid="uid://bqea1t7dreb25" path="res://assets/bg5.png" id="1_p1xa0"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dnr8ns7dtkp5w" path="res://src/puzzle_game/PuzzleGame.tscn" id="6_p00x7"]
 [ext_resource type="Resource" uid="uid://dvofq5wbxcrbe" path="res://src/resources/battler_stats/e1.tres" id="6_pd0sd"]
 [ext_resource type="Resource" uid="uid://beqrnkm1p53eq" path="res://src/resources/modifier_actions/buff_atk.tres" id="7_ibfkj"]
+[ext_resource type="PackedScene" uid="uid://dafgs0noum5tk" path="res://src/ui/ui_battler_box.tscn" id="11_1gb7u"]
 
 [sub_resource type="Resource" id="Resource_mr8fs"]
 script = ExtResource("4_soups")
@@ -82,3 +83,6 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="UIBattlerBox" parent="UI" instance=ExtResource("11_1gb7u")]
+layout_mode = 0

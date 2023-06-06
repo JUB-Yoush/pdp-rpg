@@ -31,7 +31,7 @@ var grid:Grid
 @onready var battlers := $Battlers.get_children()
 var UI
 var UIActionMenuScene = preload("res://src/ui/ui_action_list.tscn")
-var usedActionPieces :Array[ActionPiece] 
+var used_action_pieces :Array[ActionPiece] 
 
 func _ready() -> void:
 	grid = puzzleGame.get_node("Grid")
@@ -76,7 +76,7 @@ func start_puzzle():
 	puzzleGame.visible = true
 	var _active_opponents :Array[Battler]= [_opponents[0]]
 	make_opponent_actions(_active_opponents)
-	puzzleGame.start_puzzling()
+	puzzleGame.start_puzzling(used_action_pieces)
 
 
 
@@ -98,6 +98,7 @@ func end_puzzle(new_puzzle_points,ready_action_pieces:Array[ActionPiece]):
 	start_turn(ready_action_pieces)
 
 func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
+	used_action_pieces = []
 	for actionPiece in ready_action_pieces:
 		var enemy:Battler = actionPiece.action._actor
 		## if enemy can act
@@ -105,6 +106,7 @@ func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
 		await enemy.action_finished
 		actionPiece.action_preformed.emit()
 		enemy.turn_end()
+		used_action_pieces.append(actionPiece)
 
 func start_turn(enemy_action_pieces):
 	start_enemy_turn(enemy_action_pieces)
@@ -125,7 +127,6 @@ func start_party_turn():
 			continue
 		_play_turn(battler)
 		await battler.turn_passed
-		print("does ui exist? ",UI.get_node('UIActionMenu') != null)
 		if UI.get_node("UIActionMenu") != null:
 			UI.remove_child(UI.get_node("UIActionMenu"))
 			pass
@@ -144,6 +145,9 @@ func start_party_turn():
 
 func _player_select_action_async(battler) -> ActionData:
 	var actionMenu:UIActionMenu = UIActionMenuScene.instantiate()
+	var x_start = get_viewport_rect().size.x/2 - (134/2)
+	var y_start = 150
+	actionMenu.position = Vector2(x_start,y_start)
 	UI.add_child(actionMenu)
 	actionMenu.setup(battler)
 	actionMenu.focus()

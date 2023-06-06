@@ -11,7 +11,7 @@ var puzzle_points = {
 		TYPE.PR:0}
 
 var is_puzzling = true
-var puzzle_time = 2
+var puzzle_time = 20
 
 signal done_puzzling(puzzle_points,ready_action_pieces)
 
@@ -28,9 +28,18 @@ func _ready() -> void:
 
 func start_puzzling(used_action_pieces:Array[ActionPiece]) -> void:
 	is_puzzling = true
+	# if there's at least one action used last turn
+	if used_action_pieces.size() > 0:
+		rm_used_actions(used_action_pieces)
 	puzzleTimer.start(puzzle_time)
 	#make the grid visible and movable or whatever
 	pass
+
+func rm_used_actions(used_action_pieces:Array[ActionPiece]):
+	for actionPiece in used_action_pieces:
+		grid.change_to_empty(actionPiece.col,actionPiece.row)
+		grid.collapseTimer.start(grid.cleardrop_delay)
+
 
 func puzzle_timer_timeout():
 	## we need to make sure there are no more matches being destroyed or cleared
