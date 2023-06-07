@@ -10,6 +10,7 @@ signal health_changed(old_value,new_value)
 # An array of elements against which the battler is weak.
 # These weaknesses should be values from our `Types.Elements` enum.
 @export var name:String
+@export var portrait:Texture
 @export var weaknesses := []
 # The battler's elemental affinity. Gives bonuses with related actions.
 @export var affinity = Types.Elements.NONE

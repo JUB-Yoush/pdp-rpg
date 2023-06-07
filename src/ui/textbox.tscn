@@ -20,4 +20,4 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_pvsak")
-text = "hello everybody my name is slimer."
+text = "placeholder text."

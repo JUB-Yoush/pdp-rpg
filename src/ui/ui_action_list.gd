@@ -8,6 +8,7 @@ const UIPassButtonScene = preload("res://src/ui/ui_pass_button.tscn")
 
 var buttons := []
 var button_index := 0
+var active = false
 
 var is_disabled := false:
 	set(new_value):
@@ -46,7 +47,6 @@ func focus() -> void:
 	buttons[0].grab_focus()
 
 func _on_UIActionButton_focus_entered(button:UIActionButton) -> void:
-	print('_on_UIActionButton_focus_entered')
 	button.grab_focus()
 	
 
@@ -59,5 +59,6 @@ func _on_UIActionButton_button_pressed(action: ActionData) -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("up"):
 		button_index = max(0,button_index -1)
+
 	if event.is_action_pressed("down"):
 		button_index = min(buttons.size(),button_index +1)

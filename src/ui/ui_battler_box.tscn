@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://dafgs0noum5tk"]
+[gd_scene load_steps=7 format=3 uid="uid://dafgs0noum5tk"]
 
 [ext_resource type="Texture2D" uid="uid://dnnqw8wt62p8h" path="res://assets/ui/battlebox/battlebox-unfocused.png" id="1_kwfgm"]
 [ext_resource type="Texture2D" uid="uid://bsw7bbikfwhrs" path="res://assets/ui/battlebox/battlebox-focused.png" id="2_f1ayj"]
 [ext_resource type="Texture2D" uid="uid://c1rbsec5pv73c" path="res://assets/ui/battlebox/battlebox-disabled.png" id="3_0k8gk"]
 [ext_resource type="Texture2D" uid="uid://d2r7n7upolq0a" path="res://assets/battlers/glup.png" id="4_0oipj"]
+[ext_resource type="Script" path="res://src/ui/ui_battler_box.gd" id="4_dvrao"]
 [ext_resource type="Theme" uid="uid://4n7n1rpxwi13" path="res://src/theme/combat_ui_theme.tres" id="4_ke7om"]
 
 [node name="UIBattlerBox" type="TextureButton"]
@@ -12,6 +13,7 @@ offset_bottom = 40.0
 texture_normal = ExtResource("1_kwfgm")
 texture_pressed = ExtResource("2_f1ayj")
 texture_disabled = ExtResource("3_0k8gk")
+script = ExtResource("4_dvrao")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -29,6 +31,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="NameLabel" type="Label" parent="VBoxContainer"]
+unique_name_in_owner = true
 modulate = Color(0.760784, 0.760784, 0.819608, 1)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -36,7 +39,6 @@ theme = ExtResource("4_ke7om")
 text = "P.Rat"
 
 [node name="Portrait" type="TextureRect" parent="VBoxContainer"]
-visible = false
 layout_mode = 2
 texture = ExtResource("4_0oipj")
 stretch_mode = 2

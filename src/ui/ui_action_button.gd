@@ -38,7 +38,6 @@ func _on_pressed() -> void:
 	release_focus()
 
 func display_focus():
-	print(focus_mode)
 	if disabled == false:
 		_label_node.modulate = focused_color
 		_icon_node.texture = load(focused_icon)

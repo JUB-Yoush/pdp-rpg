@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://dnr8ns7dtkp5w" path="res://src/puzzle_game/PuzzleGame.tscn" id="6_p00x7"]
 [ext_resource type="Resource" uid="uid://dvofq5wbxcrbe" path="res://src/resources/battler_stats/e1.tres" id="6_pd0sd"]
 [ext_resource type="Resource" uid="uid://beqrnkm1p53eq" path="res://src/resources/modifier_actions/buff_atk.tres" id="7_ibfkj"]
-[ext_resource type="PackedScene" uid="uid://dafgs0noum5tk" path="res://src/ui/ui_battler_box.tscn" id="11_1gb7u"]
 [ext_resource type="PackedScene" uid="uid://b4j888tqjdun1" path="res://src/ui/textbox.tscn" id="11_2phws"]
+[ext_resource type="Script" path="res://src/ui_battler_box_menu.gd" id="12_3onmu"]
 
 [sub_resource type="Resource" id="Resource_mr8fs"]
 script = ExtResource("4_soups")
@@ -54,7 +54,8 @@ script = ExtResource("2_04bfm")
 stats = ExtResource("4_useah")
 actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_ow76w"), ExtResource("6_b0wtg"), ExtResource("7_ibfkj")])
 
-[node name="PlayerBattler3" type="Node2D" parent="CombatManager/Battlers"]
+[node name="PlayerBattler2" type="Node2D" parent="CombatManager/Battlers"]
+position = Vector2(0, 1)
 script = ExtResource("2_04bfm")
 stats = ExtResource("4_useah")
 actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_ow76w"), ExtResource("6_b0wtg"), ExtResource("7_ibfkj")])
@@ -77,25 +78,50 @@ stats = ExtResource("6_pd0sd")
 actions = Array[Resource("res://src/actions/action_data.gd")]([SubResource("Resource_mr8fs")])
 is_party_member = false
 
+[node name="EnemyBattler4" type="Node2D" parent="CombatManager/Battlers"]
+script = ExtResource("2_04bfm")
+stats = ExtResource("6_pd0sd")
+actions = Array[Resource("res://src/actions/action_data.gd")]([SubResource("Resource_mr8fs")])
+is_party_member = false
+
 [node name="PuzzleGame" parent="CombatManager" instance=ExtResource("6_p00x7")]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="Textbox" parent="UI" instance=ExtResource("11_2phws")]
+visible = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 175.0
-offset_top = 254.0
-offset_right = 463.0
-offset_bottom = 351.0
+offset_left = 182.0
+offset_top = 258.0
+offset_right = 470.0
+offset_bottom = 355.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="UIBattlerBox" parent="UI" instance=ExtResource("11_1gb7u")]
-layout_mode = 0
+[node name="PartyBoxes" type="VBoxContainer" parent="UI"]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 16.0
+offset_right = 81.0
+offset_bottom = 348.0
+script = ExtResource("12_3onmu")
+
+[node name="EnemyBoxes" type="VBoxContainer" parent="UI"]
+layout_mode = 2
+offset_left = 558.0
+offset_top = 17.0
+offset_right = 638.0
+offset_bottom = 349.0
+script = ExtResource("12_3onmu")
