@@ -47,7 +47,8 @@ func focus() -> void:
 	buttons[0].grab_focus()
 
 func _on_UIActionButton_focus_entered(button:UIActionButton) -> void:
-	button.grab_focus()
+	pass
+	#button.grab_focus()
 	
 
 func _on_UIActionButton_button_pressed(action: ActionData) -> void:
@@ -58,7 +59,11 @@ func _on_UIActionButton_button_pressed(action: ActionData) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("up"):
+		if is_disabled: return
 		button_index = max(0,button_index -1)
+		buttons[button_index].grab_focus()
 
 	if event.is_action_pressed("down"):
-		button_index = min(buttons.size(),button_index +1)
+		if is_disabled: return
+		button_index = min(buttons.size()-1,button_index +1)
+		buttons[button_index].grab_focus()

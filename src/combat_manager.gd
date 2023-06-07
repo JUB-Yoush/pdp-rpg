@@ -167,13 +167,14 @@ func _player_select_targets_async(_action:ActionData,opponents:Array[Battler]) -
 		else:
 			return opponents
 	#get relevant group of nodes
-	var selectable_targets :VBoxContainer = partyBoxes if _action.is_targeting_self else enemyBoxes
-	var selected_targets = await selectable_targets.target_selected
-	selectable_targets.get_child(0).grab_focus()
+	var selectable_targets :UIBattlerBoxMenu = partyBoxes if _action.is_targeting_self else enemyBoxes
+	selectable_targets.setup()
+	var selected_targets :Array[Battler]= await selectable_targets.target_selected
+	print("target(s) chosen is ", selected_targets)
 
 
 
-	return []
+	return selected_targets
 
 
 func _input(event: InputEvent) -> void:

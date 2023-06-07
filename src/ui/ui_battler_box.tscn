@@ -8,11 +8,13 @@
 [ext_resource type="Theme" uid="uid://4n7n1rpxwi13" path="res://src/theme/combat_ui_theme.tres" id="4_ke7om"]
 
 [node name="UIBattlerBox" type="TextureButton"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = -1.0
+offset_right = 80.0
+offset_bottom = 79.0
 texture_normal = ExtResource("1_kwfgm")
 texture_pressed = ExtResource("2_f1ayj")
 texture_disabled = ExtResource("3_0k8gk")
+texture_focused = ExtResource("2_f1ayj")
 script = ExtResource("4_dvrao")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
