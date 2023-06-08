@@ -64,9 +64,7 @@ func _take_damage(amount:int) -> void:
 	prints("took",amount,"damage, health is now",stats.health)
 
 func act(action:Action) -> void:
-	print('battler doing an action!!!')
 	if is_party_member:
-		print("it's a party member too!?")
 		remove_energy(action)
 	await action.apply_async()
 	#if is_active: 

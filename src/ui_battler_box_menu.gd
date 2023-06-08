@@ -7,6 +7,7 @@ var BattleBoxScene :PackedScene = preload("res://src/ui/ui_battler_box.tscn")
 
 var button_index:int = 0
 var is_disabled:= true
+
 func make_battler_box(battler:Battler):
 	var battlerBox :UIBattlerBox = BattleBoxScene.instantiate()
 	battlerBox.setup(battler)
@@ -20,7 +21,7 @@ func setup():
 		focus()
 
 func _on_UIBattlerBox_target_selected(target:Battler):
-	target_selected.emit([target])
+	target_selected.emit(target)
 	pass
 
 func _on_UIBattlerBox_focus_entered(battleBox:UIBattlerBox):

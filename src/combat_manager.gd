@@ -43,7 +43,6 @@ func _play_turn(battler:Battler):
 
 		var actionData :ActionData = await _player_select_action_async(battler)
 		var targets :Array[Battler]= await _player_select_targets_async(actionData,_opponents)
-		prints("target(s) chosen are:",targets)
 		var action:= ActionFactory.new_action(actionData,battler,targets)
 		
 		battler.act(action)
@@ -158,7 +157,6 @@ func _player_select_action_async(battler) -> ActionData:
 	return action_data
 
 func _player_select_targets_async(_action:ActionData,opponents:Array[Battler]) -> Array[Battler]:
-	print('func _player_select_targets_async(_action:ActionData,opponents:Array[Battler]) -> Array[Battler]:')
 	battler_selecting = true
 	# if it hits everyone don't select battlers??? (might be nice to multi hilight though)
 	if _action.is_targeting_all:
@@ -169,12 +167,11 @@ func _player_select_targets_async(_action:ActionData,opponents:Array[Battler]) -
 	#get relevant group of nodes
 	var selectable_targets :UIBattlerBoxMenu = partyBoxes if _action.is_targeting_self else enemyBoxes
 	selectable_targets.setup()
-	var selected_targets :Array[Battler]= await selectable_targets.target_selected
+	var selected_targets :Battler= await selectable_targets.target_selected
+	var targets :Array[Battler] = []
+	targets.append(selectable_targets)
 	print("target(s) chosen is ", selected_targets)
-
-
-
-	return selected_targets
+	return targets
 
 
 func _input(event: InputEvent) -> void:
