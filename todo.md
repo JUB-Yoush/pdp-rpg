@@ -37,6 +37,12 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 - add battler boxes for each battler in the fight
 - work on async selection function
 - add Ui for users to select their actions and targets
+
+- add magic attack and magic def?
+- add a fake all selection for selecting every target (hilight everyone when await a confirm input event)
+- fix that typing error I'm getting
+- then it's time to make content????
+
 - heal party in between fights
 - create content
 - radomization
