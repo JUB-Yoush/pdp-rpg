@@ -156,21 +156,26 @@ func _player_select_action_async(battler) -> ActionData:
 	actionMenu.queue_free()
 	return action_data
 
-func _player_select_targets_async(_action:ActionData,opponents:Array[Battler]) -> Array[Battler]:
+func _player_select_targets_async(_action:ActionData,opponents:Array[Battler]) -> Array[Battler]:	
 	battler_selecting = true
-	# if it hits everyone don't select battlers??? (might be nice to multi hilight though)
-	if _action.is_targeting_all:
-		if _action.is_targeting_self:
-			return _party_members
-		else:
-			return opponents
 	#get relevant group of nodes
 	var selectable_targets :UIBattlerBoxMenu = partyBoxes if _action.is_targeting_self else enemyBoxes
+	if _action.is_targeting_all:
+			return await _all_target_selection(selectable_targets)
+
 	selectable_targets.setup()
 	var selected_targets :Battler= await selectable_targets.target_selected
 	var targets :Array[Battler] = []
 	targets.append(selectable_targets)
 	print("target(s) chosen is ", selected_targets)
+	return targets
+
+func _all_target_selection(targetBoxes:UIBattlerBoxMenu):
+	var targets:Array[Battler] = []
+	targetBoxes.grab_all()
+	for targetBox in targetBoxes.get_children():targets.append(targetBox.battler)
+	await targetBoxes.get_child(0).pressed
+	targetBoxes.ungrab_all()
 	return targets
 
 

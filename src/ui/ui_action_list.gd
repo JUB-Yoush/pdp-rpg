@@ -40,7 +40,7 @@ func setup(battler:Battler) -> void:
 
 func _ready() -> void:
 	var x_start = get_viewport_rect().size.x/2 - (134/2)
-	var y_start = 100
+	var y_start = 50
 	position = Vector2(x_start,y_start)
 
 func focus() -> void:

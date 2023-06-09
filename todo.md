@@ -24,23 +24,18 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 	~~- heal actions~~
 ~~- add stat modifing actions (figure out a turn time limit system)~~
 
-- make all actions have a red and green cost
-- get skill cost working (feed puzzle points through the battlers?)
+~~- make all actions have a red and green cost~~
+~~- get skill cost working (feed puzzle points through the battlers?)~~
+~~- add battler boxes for each battler in the fight~~
+~~- work on async selection function~~
+~~- add Ui for users to select their actions and targets~~
+
+~~- add a fake all selection for selecting every target (highlight everyone when await a confirm input event)~~
+- display values on the ui nodes
+- deconfirm target selection and go back to action selection
+- fix that typing error I'm getting
 - add bad Ai for enemies to select actions (weighted randomization)
 - ko/negative hp state for pm
-
-
-
-- action ui:
-	- make
-
-- add battler boxes for each battler in the fight
-- work on async selection function
-- add Ui for users to select their actions and targets
-
-- add magic attack and magic def?
-- add a fake all selection for selecting every target (hilight everyone when await a confirm input event)
-- fix that typing error I'm getting
 - then it's time to make content????
 
 - heal party in between fights
@@ -68,6 +63,8 @@ kinds of pieces:
 - don't even THINK about dungeon crawling until this is done >:(
 
 post mvp:
+- fix and comment the codebase so you don't lose your mind coming back to it in 2 months.
+- add magic attack and magic def?
 - fix things that could be static classes/objects instead of nodes
 - fix modifers checking based on strings instead of an enum
 - recognize combos (also maybe chains??)

@@ -8,6 +8,11 @@ const focused_color := 'ffffeb'
 const unfocused_color := 'c2c2d1'
 const disabled_color := '43434f'
 
+const focused_border := 'res://assets/ui/battlebox/battlebox-focused.png'
+const unfocused_border := 'res://assets/ui/battlebox/battlebox-unfocused.png'
+const disabled_border := 'res://assets/ui/battlebox/battlebox-disabled.png'
+
+
 @onready var nameLabel := find_child("NameLabel")
 @onready var portrait := $VBoxContainer/Portrait
 @onready var hpLabel := $VBoxContainer/HPLabel
@@ -34,6 +39,7 @@ func display_focus():
 	if disabled == false:
 		nameLabel.modulate = focused_color
 		hpLabel.modulate = focused_color
+		
 
 
 func display_unfocus():

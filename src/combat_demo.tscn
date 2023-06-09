@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dg0frypjhsr8x"]
+[gd_scene load_steps=15 format=3 uid="uid://dg0frypjhsr8x"]
 
 [ext_resource type="Script" path="res://src/combat_manager.gd" id="1_fjji6"]
 [ext_resource type="Texture2D" uid="uid://bqea1t7dreb25" path="res://assets/bg5.png" id="1_p1xa0"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://src/actions/attack_action_data.gd" id="4_soups"]
 [ext_resource type="Resource" uid="uid://uioustulufim" path="res://src/resources/battler_stats/p1.tres" id="4_useah"]
 [ext_resource type="Resource" uid="uid://c60v2dntwc3gc" path="res://src/resources/heal_actions/small_heal.tres" id="6_b0wtg"]
+[ext_resource type="Resource" uid="uid://bea8m878vymf8" path="res://src/resources/attack_actions/multi_attack.tres" id="6_iu0rk"]
 [ext_resource type="PackedScene" uid="uid://dnr8ns7dtkp5w" path="res://src/puzzle_game/PuzzleGame.tscn" id="6_p00x7"]
 [ext_resource type="Resource" uid="uid://dvofq5wbxcrbe" path="res://src/resources/battler_stats/e1.tres" id="6_pd0sd"]
 [ext_resource type="Resource" uid="uid://beqrnkm1p53eq" path="res://src/resources/modifier_actions/buff_atk.tres" id="7_ibfkj"]
@@ -52,7 +53,7 @@ script = ExtResource("1_fjji6")
 [node name="PlayerBattler" type="Node2D" parent="CombatManager/Battlers"]
 script = ExtResource("2_04bfm")
 stats = ExtResource("4_useah")
-actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_ow76w"), ExtResource("6_b0wtg"), ExtResource("7_ibfkj")])
+actions = Array[Resource("res://src/actions/action_data.gd")]([ExtResource("4_ow76w"), ExtResource("6_iu0rk"), ExtResource("6_b0wtg"), ExtResource("7_ibfkj")])
 
 [node name="PlayerBattler2" type="Node2D" parent="CombatManager/Battlers"]
 position = Vector2(0, 1)

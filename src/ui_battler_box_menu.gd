@@ -41,6 +41,19 @@ func deactivate():
 	pass
 
 
+func grab_all():
+	activate()
+	for battleBox in get_children():
+		battleBox.texture_normal = load(battleBox.focused_border)
+		battleBox.display_focus()
+	focus()
+
+func ungrab_all():
+	for battleBox in get_children():
+		battleBox.texture_normal = load(battleBox.unfocused_border)
+		battleBox.display_unfocus()
+	deactivate()
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("up") and !is_disabled:
 		button_index = max(0,button_index -1)
@@ -49,3 +62,4 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("down") and !is_disabled:
 		button_index = min(get_child_count()-1,button_index +1)
 		get_child(button_index).grab_focus()
+
