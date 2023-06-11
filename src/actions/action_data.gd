@@ -27,8 +27,23 @@ var color_used:Types.ColorCost
 @export var is_targeting_self := false
 @export var is_targeting_all := false
 
+func _init() -> void:
+	if color_cost[Types.ColorCost.RE] > 0:
+		color_used = Types.ColorCost.RE
+	elif color_cost[Types.ColorCost.GR] > 0:
+		color_used = Types.ColorCost.GR
+	else:
+		color_used = Types.ColorCost.FR
+
 func can_be_used_by(battler:Battler) -> bool:
-	prints(color_cost[color_used],battler.stats.energy[color_used])
+	if color_cost[Types.ColorCost.RE] > 0:
+		color_used = Types.ColorCost.RE
+	elif color_cost[Types.ColorCost.GR] > 0:
+		color_used = Types.ColorCost.GR
+	else:
+		color_used = Types.ColorCost.FR
+	#prints(label,color_used)
+	#prints(label,color_cost[color_used],battler.stats.energy[color_used],color_cost[color_used] <= battler.stats.energy[color_used])
 	return color_cost[color_used] <= battler.stats.energy[color_used]
 
 

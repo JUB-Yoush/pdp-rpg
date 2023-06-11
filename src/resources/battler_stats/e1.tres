@@ -5,13 +5,13 @@
 
 [resource]
 script = ExtResource("1_ol0ap")
-max_health = 20
-name = "e1"
+max_health = 25
+name = "Goon"
 portrait = ExtResource("1_k83ap")
 weaknesses = []
 affinity = 0
-base_attack = 10
-base_defence = 10
+base_attack = 8
+base_defence = 0
 base_speed = 10
 base_hit_chance = 100
 base_evasion = 0

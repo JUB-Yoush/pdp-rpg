@@ -5,19 +5,27 @@ enum STATES {PUZZLE,TURN}
 var _state = STATES.TURN
 var _party_members :Array[Battler]= []
 var _opponents :Array[Battler]= []
+var enemy_display_delay: =1.0
 enum TYPE {RE,BL,GR,YE,PR,EM}
+
 #manage points, timer, and state transitions 
 var puzzle_points = {
-		TYPE.RE:50,
+		TYPE.RE:0,
 		TYPE.BL:0,
 		TYPE.GR:50,
 		TYPE.YE:0,
-		TYPE.PR:0}
+		TYPE.PR:0}:
+		set(new_value):
+			puzzle_points = new_value
+			update_point_display()
+		get:
+			return puzzle_points
 
 var grid:Grid 
 var battler_selecting = false
 @onready var puzzleGame := $PuzzleGame
 @onready var battlers := $Battlers.get_children()
+@onready var puzzlePointContainer := get_parent().get_node("UI/PuzzlePointContainer")
 var UI:Control
 var partyBoxes:VBoxContainer
 var enemyBoxes:VBoxContainer
@@ -28,6 +36,7 @@ var UIActionMenuScene := preload("res://src/ui/ui_action_list.tscn")
 var used_action_pieces :Array[ActionPiece] 
 
 func _ready() -> void:
+	seed(4)
 	grid = puzzleGame.get_node("Grid")
 	UI = get_parent().get_node("UI")
 	puzzleGame.done_puzzling.connect(end_puzzle)
@@ -47,7 +56,7 @@ func _play_turn(battler:Battler):
 		
 		battler.act(action)
 		await battler.action_finished
-	
+		
 func battle_start():
 	# make battler portraits
 	partyBoxes = UI.get_node('PartyBoxes')
@@ -76,7 +85,9 @@ func end_turn():
 
 func start_puzzle():
 	puzzleGame.visible = true
-	var _active_opponents :Array[Battler]= [_opponents[0]]
+	var _active_opponents :Array[Battler]= []
+	for opp in _opponents:
+		if opp.is_active: _active_opponents.append(opp)
 	make_opponent_actions(_active_opponents)
 	puzzleGame.start_puzzling(used_action_pieces)
 
@@ -84,13 +95,25 @@ func start_puzzle():
 
 func make_opponent_actions(_active_opponents:Array[Battler]):
 	#loop thru every opponent and...
-	var battler :Battler = _active_opponents[0] #hard code for testing
-	var targets :Array[Battler]= [_party_members[0]] #hard coded
-	var actionData :ActionData = battler.actions[0]
-	var action:= ActionFactory.new_action(actionData,battler,targets)
-	var action_array :Array[Action]= [action]
+	var action_array :Array[Action]= []
+	for opp in _active_opponents:
+		#pick random acttoin
+		var actionData :ActionData = opp.actions[randi_range(0,opp.actions.size()-1)]
+		var targets :Array[Battler]= pick_party_targets(actionData)
+		var action:= ActionFactory.new_action(actionData,opp,targets)
+		action_array.append(action)
 	#might be better to route thru puzzle game node
 	grid.add_rows_with_actions(_active_opponents.size(),action_array)
+
+func pick_party_targets(actionData:ActionData) -> Array[Battler]:
+	# returns random target
+	var targets:Array[Battler]=[]
+	if actionData.is_targeting_self:targets = _opponents
+	else: targets = _party_members
+	if actionData.is_targeting_all: return targets
+	else: return [targets[randi_range(0,targets.size()-1)]]
+		
+	
 
 func end_puzzle(new_puzzle_points,ready_action_pieces:Array[ActionPiece]):
 	# passed in is a dictonary of all points made from the puzzle phase as well as actions to call before the player can act
@@ -99,10 +122,22 @@ func end_puzzle(new_puzzle_points,ready_action_pieces:Array[ActionPiece]):
 	puzzle_points = new_puzzle_points
 	start_turn(ready_action_pieces)
 
+func update_point_display(): 
+	print('update_point_display')
+	puzzlePointContainer.get_node("RE").text = str(puzzle_points[TYPE.RE])
+	puzzlePointContainer.get_node("BL").text = str(puzzle_points[TYPE.BL])
+	puzzlePointContainer.get_node("GR").text = str(puzzle_points[TYPE.GR])
+
 func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
 	used_action_pieces = []
 	for actionPiece in ready_action_pieces:
 		var enemy:Battler = actionPiece.action._actor
+		# if the enemy died after placing an action just remove the piece
+		if !enemy.is_active:
+			actionPiece.action_preformed.emit()
+			used_action_pieces.append(actionPiece)
+			continue
+		await display_enemy_action(actionPiece.action)
 		## if enemy can act
 		enemy.act(actionPiece.action)
 		await enemy.action_finished
@@ -110,19 +145,49 @@ func start_enemy_turn(ready_action_pieces:Array[ActionPiece]):
 		enemy.turn_end()
 		used_action_pieces.append(actionPiece)
 
+func display_enemy_action(action:Action):
+	var battler = action._actor
+	for box in enemyBoxes.get_children():
+		if box.battler == battler:
+			var actionDisplay = box.get_node("ActionDisplay")
+			actionDisplay.visible = true
+			# fill in button data based on action
+			actionDisplay.get_node("HBoxContainer/Label").text = action._data.label
+			actionDisplay.get_node("HBoxContainer/Icon").texture = action._data.icon
+			
+			await get_tree().create_timer(enemy_display_delay).timeout
+			actionDisplay.visible = false
+			break
+
+
 func start_turn(enemy_action_pieces):
 	textBox.visible = true
-	start_enemy_turn(enemy_action_pieces)
+	give_shield_points()
+	check_for_winner()
+	await start_enemy_turn(enemy_action_pieces)
 	start_party_turn()
-
-	#loop thru enemies and put in speed-sorted array
-	# play turn for each purple counted down
-
-	# loop through all our party members
-	# sort them by speed stat
-	# play_turn for each of them
-	# at end of loop go back to puzzle ig
 	pass
+
+func check_for_winner():
+	var out_battlers = 0
+	for battler in _party_members:
+		if !battler.is_active:
+			out_battlers += 1
+	if out_battlers == _party_members.size():
+		#players lose
+		pass
+
+	out_battlers = 0
+	for battler in _opponents:
+		if !battler.is_active:
+			out_battlers += 1
+	if out_battlers == _opponents.size():
+		#players win
+		pass
+
+func give_shield_points():
+	for battler in _party_members:
+		battler.stats.shield_points = puzzle_points[TYPE.BL]
 
 func start_party_turn():
 	for battler in _party_members:
@@ -133,17 +198,7 @@ func start_party_turn():
 		if UI.get_node("UIActionMenu") != null:
 			UI.remove_child(UI.get_node("UIActionMenu"))
 			pass
-	#print('okay all done loop')
-				
-				
-		
-	# loop through all our party members
-	# sort them by speed stat
-	# play_turn for each of them
-	# at end of loop go back to puzzle ig
 	end_turn()
-
-
 	pass
 
 func _player_select_action_async(battler) -> ActionData:
@@ -164,17 +219,25 @@ func _player_select_targets_async(_action:ActionData,opponents:Array[Battler]) -
 			return await _all_target_selection(selectable_targets)
 
 	selectable_targets.setup()
-	var selected_targets :Battler= await selectable_targets.target_selected
+	var selected_targets :Battler = await selectable_targets.target_selected
+	print(selected_targets)
 	var targets :Array[Battler] = []
-	targets.append(selectable_targets)
+	targets.append(selected_targets)
 	print("target(s) chosen is ", selected_targets)
+	selectable_targets.shutdown()
 	return targets
 
 func _all_target_selection(targetBoxes:UIBattlerBoxMenu):
 	var targets:Array[Battler] = []
 	targetBoxes.grab_all()
-	for targetBox in targetBoxes.get_children():targets.append(targetBox.battler)
-	await targetBoxes.get_child(0).pressed
+	for targetBox in targetBoxes.get_children():
+		if targetBox.battler.is_active:
+			targets.append(targetBox.battler)
+	# get first active battler
+	var index = 0
+	while !targetBoxes.get_child(index).battler.is_active:
+		index += 1
+	await targetBoxes.get_child(index).pressed
 	targetBoxes.ungrab_all()
 	return targets
 

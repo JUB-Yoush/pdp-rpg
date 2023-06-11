@@ -2,13 +2,13 @@
 
 [ext_resource type="PackedScene" uid="uid://cx4wa4flc30g4" path="res://src/ui/ui_action_button.tscn" id="1_aucrl"]
 [ext_resource type="Script" path="res://src/ui/ui_pass_button.gd" id="2_vetuc"]
-[ext_resource type="Texture2D" uid="uid://bcyti5ecis1wb" path="res://assets/ui/action-icon-unfocused.png" id="3_6vw5y"]
+[ext_resource type="Texture2D" uid="uid://cmurh8wobcu1a" path="res://assets/ui/action_icons/pass-icon.png" id="3_yusds"]
 
 [node name="UIActionButton" instance=ExtResource("1_aucrl")]
 script = ExtResource("2_vetuc")
 
 [node name="Icon" parent="HBoxContainer" index="0"]
-texture = ExtResource("3_6vw5y")
+texture = ExtResource("3_yusds")
 
 [node name="Label" parent="HBoxContainer" index="1"]
 text = "PASS"

@@ -6,6 +6,8 @@ signal action_selected(action)
 const UIActionButton:PackedScene = preload("res://src/ui/ui_action_button.tscn")
 const UIPassButtonScene = preload("res://src/ui/ui_pass_button.tscn")
 
+@onready var textbox := get_parent().get_node("Textbox")
+
 var buttons := []
 var button_index := 0
 var active = false
@@ -40,7 +42,7 @@ func setup(battler:Battler) -> void:
 
 func _ready() -> void:
 	var x_start = get_viewport_rect().size.x/2 - (134/2)
-	var y_start = 50
+	var y_start = 75
 	position = Vector2(x_start,y_start)
 
 func focus() -> void:
@@ -62,8 +64,10 @@ func _input(event: InputEvent) -> void:
 		if is_disabled: return
 		button_index = max(0,button_index -1)
 		buttons[button_index].grab_focus()
+		textbox.update_text(buttons[button_index].description)
 
 	if event.is_action_pressed("down"):
 		if is_disabled: return
 		button_index = min(buttons.size()-1,button_index +1)
 		buttons[button_index].grab_focus()
+		textbox.update_text(buttons[button_index].description)

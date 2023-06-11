@@ -2,10 +2,10 @@ extends Resource
 class_name BattlerStats
 
 signal health_depleted
-signal health_changed(old_value,new_value)
+signal health_changed(new_value)
 
 
-@export var max_health := 20
+@export var max_health:int
 
 # An array of elements against which the battler is weak.
 # These weaknesses should be values from our `Types.Elements` enum.
@@ -20,11 +20,12 @@ var energy = {
 	Types.ColorCost.GR:0,
 }
 
+var shield_points:int
+
 var health := max_health:
 	set(new_value):
-		var old_health := health
 		health = clamp(new_value,0,max_health)
-		health_changed.emit(old_health,health)
+		health_changed.emit(health)
 		if health == 0:health_depleted.emit()
 	get:
 		return health
@@ -78,8 +79,9 @@ const UPGRADABLE_STATS :Array[String]= ["max_health","max_energy","attack",
 var _modifiers := {}
 var modifer_timing_tracker :Array[StatModifier]= []
 func _init() -> void:
-		for stat in UPGRADABLE_STATS:
-				_modifiers[stat] = {}
+	health = max_health
+	for stat in UPGRADABLE_STATS:
+			_modifiers[stat] = {}
 
 func _recalculate_and_update(stat:String):
 		var value:float = get("base_" + stat)

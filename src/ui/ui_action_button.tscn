@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://cx4wa4flc30g4"]
+[gd_scene load_steps=8 format=3 uid="uid://cx4wa4flc30g4"]
 
 [ext_resource type="Theme" uid="uid://4n7n1rpxwi13" path="res://src/theme/combat_ui_theme.tres" id="1_0i6qt"]
 [ext_resource type="Texture2D" uid="uid://crwauqjpetsk8" path="res://assets/ui/action-button.png" id="1_gdab2"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://drgsrxqt665n3" path="res://assets/ui/action-button-disabled.png" id="3_l4rcw"]
 [ext_resource type="Script" path="res://src/ui/ui_action_button.gd" id="5_0yqjk"]
 [ext_resource type="FontFile" uid="uid://t0ckvlv6kh50" path="res://assets/fonts/Awe Mono Gold.ttf" id="5_jk4px"]
+[ext_resource type="Texture2D" uid="uid://bcyti5ecis1wb" path="res://assets/ui/action-icon-unfocused.png" id="6_p8aq6"]
 
 [node name="UIActionButton" type="TextureButton"]
 offset_right = 134.0
@@ -31,6 +32,7 @@ grow_vertical = 2
 
 [node name="Icon" type="TextureRect" parent="HBoxContainer"]
 layout_mode = 2
+texture = ExtResource("6_p8aq6")
 stretch_mode = 2
 
 [node name="Label" type="Label" parent="HBoxContainer"]

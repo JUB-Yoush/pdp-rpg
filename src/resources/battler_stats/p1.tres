@@ -5,14 +5,13 @@
 
 [resource]
 script = ExtResource("1_cy3mm")
-max_health = 20
-name = "p1"
+max_health = 15
+name = "Vagrant"
 portrait = ExtResource("1_vbl8h")
 weaknesses = []
 affinity = 0
-base_attack = 10
-base_defence = 10
+base_attack = 8
+base_defence = 3
 base_speed = 10
 base_hit_chance = 100
-base_evasion = 0
-metadata/_editor_prop_ptr_portrait = null
+base_evasion = 10

@@ -17,7 +17,7 @@ metadata/_edit_vertical_guides_ = [322.0]
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource("2_hvm35")
-starting_row_count = 5
+starting_row_count = 2
 
 [node name="Cursor" parent="." instance=ExtResource("3_kbrgb")]
 
@@ -56,33 +56,6 @@ offset_right = 346.0
 offset_bottom = 50.0
 theme = SubResource("Theme_mpqnt")
 text = "1.1"
-horizontal_alignment = 1
-
-[node name="PuzzlePointContainer" type="HBoxContainer" parent="."]
-offset_left = 134.0
-offset_top = 44.0
-offset_right = 513.0
-offset_bottom = 84.0
-alignment = 1
-
-[node name="RE" type="Label" parent="PuzzlePointContainer"]
-layout_mode = 2
-text = "RE:0"
-horizontal_alignment = 1
-
-[node name="BL" type="Label" parent="PuzzlePointContainer"]
-layout_mode = 2
-text = "BL:0"
-horizontal_alignment = 1
-
-[node name="GR" type="Label" parent="PuzzlePointContainer"]
-layout_mode = 2
-text = "GR:0"
-horizontal_alignment = 1
-
-[node name="YE" type="Label" parent="PuzzlePointContainer"]
-layout_mode = 2
-text = "YE:0"
 horizontal_alignment = 1
 
 [node name="PiecePos" type="Label" parent="."]

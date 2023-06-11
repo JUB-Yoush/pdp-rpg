@@ -1,12 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4j888tqjdun1"]
+[gd_scene load_steps=4 format=3 uid="uid://b4j888tqjdun1"]
 
 [ext_resource type="Texture2D" uid="uid://dtmt55xf7eudj" path="res://assets/ui/textbox/textbox.png" id="1_82m7q"]
 [ext_resource type="Theme" uid="uid://4n7n1rpxwi13" path="res://src/theme/combat_ui_theme.tres" id="2_pvsak"]
+[ext_resource type="Script" path="res://src/ui/ui_textbox.gd" id="2_tttyh"]
 
 [node name="Textbox" type="TextureRect"]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("1_82m7q")
+script = ExtResource("2_tttyh")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -21,3 +23,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("2_pvsak")
 text = "placeholder text."
+autowrap_mode = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

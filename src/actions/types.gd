@@ -11,5 +11,5 @@ const WEAKNESS_MAPPING = {
 }
 enum ActionType {ATTACK,HEAL,MODIFIER}
 
-# Red, Green, Free
-enum ColorCost {RE,GR,FR}
+# Red, Green, blue Free
+enum ColorCost {RE,GR,BL,FR}

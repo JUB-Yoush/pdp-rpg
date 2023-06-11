@@ -29,9 +29,11 @@ how does one make a panel de pon (at least the mechanics needed for my game)
 ~~- add battler boxes for each battler in the fight~~
 ~~- work on async selection function~~
 ~~- add Ui for users to select their actions and targets~~
-
 ~~- add a fake all selection for selecting every target (highlight everyone when await a confirm input event)~~
+
 - display values on the ui nodes
+- check if selecting all battlers with a selecting everyone bool
+- display a button of the currently chosen action after choice is made
 - deconfirm target selection and go back to action selection
 - fix that typing error I'm getting
 - add bad Ai for enemies to select actions (weighted randomization)
