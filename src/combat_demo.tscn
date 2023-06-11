@@ -149,7 +149,6 @@ text = "YE:0"
 horizontal_alignment = 1
 
 [node name="Screenwipe" type="TextureRect" parent="."]
-visible = false
 self_modulate = Color(0.00392157, 0.00392157, 0.00392157, 0.4)
 offset_right = 665.0
 offset_bottom = 365.0
@@ -158,9 +157,9 @@ script = ExtResource("15_o8omp")
 
 [node name="Label" type="Label" parent="Screenwipe"]
 layout_mode = 0
-offset_left = 292.0
-offset_top = 164.0
-offset_right = 364.0
-offset_bottom = 190.0
+offset_left = 294.0
+offset_top = 150.0
+offset_right = 366.0
+offset_bottom = 176.0
 theme = ExtResource("15_0rlox")
 text = "You lose!"

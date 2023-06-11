@@ -25,6 +25,7 @@ var grid:Grid
 var battler_selecting = false
 @onready var puzzleGame := $PuzzleGame
 @onready var battlers := $Battlers.get_children()
+@onready var screenwipe := get_parent().get_node("Screenwipe")
 @onready var puzzlePointContainer := get_parent().get_node("UI/PuzzlePointContainer")
 var UI:Control
 var partyBoxes:VBoxContainer
@@ -49,7 +50,7 @@ func _play_turn(battler:Battler):
 	battler.turn_start()
 	print("play turn")
 	while !battler.turn_ended:
-
+		check_for_winner()
 		var actionData :ActionData = await _player_select_action_async(battler)
 		var targets :Array[Battler]= await _player_select_targets_async(actionData,_opponents)
 		var action:= ActionFactory.new_action(actionData,battler,targets)
@@ -174,7 +175,7 @@ func check_for_winner():
 		if !battler.is_active:
 			out_battlers += 1
 	if out_battlers == _party_members.size():
-		#players lose
+		party_lost()
 		pass
 
 	out_battlers = 0
@@ -182,7 +183,7 @@ func check_for_winner():
 		if !battler.is_active:
 			out_battlers += 1
 	if out_battlers == _opponents.size():
-		#players win
+		party_won()
 		pass
 
 func give_shield_points():
@@ -241,6 +242,13 @@ func _all_target_selection(targetBoxes:UIBattlerBoxMenu):
 	targetBoxes.ungrab_all()
 	return targets
 
+func party_lost():
+	screenwipe.activate("party lost! \n press R to restart \n thanks for playing")
+	pass
+
+func party_won():
+	screenwipe.activate("party won! \n press R to restart \n thanks for playing")
+	pass
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("end_turn"):
