@@ -17,7 +17,7 @@ metadata/_edit_vertical_guides_ = [322.0]
 
 [node name="Grid" type="Node2D" parent="."]
 script = ExtResource("2_hvm35")
-starting_row_count = 2
+starting_row_count = 3
 
 [node name="Cursor" parent="." instance=ExtResource("3_kbrgb")]
 

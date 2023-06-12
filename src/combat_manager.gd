@@ -12,7 +12,7 @@ enum TYPE {RE,BL,GR,YE,PR,EM}
 var puzzle_points = {
 		TYPE.RE:0,
 		TYPE.BL:0,
-		TYPE.GR:50,
+		TYPE.GR:0,
 		TYPE.YE:0,
 		TYPE.PR:0}:
 		set(new_value):
@@ -37,8 +37,8 @@ var UIActionMenuScene := preload("res://src/ui/ui_action_list.tscn")
 var used_action_pieces :Array[ActionPiece] 
 
 func _ready() -> void:
-	seed(4)
 	grid = puzzleGame.get_node("Grid")
+	grid.topped_out.connect(func (): screenwipe.activate("topped out! \n thanks for playing \n press r to restart"))
 	UI = get_parent().get_node("UI")
 	puzzleGame.done_puzzling.connect(end_puzzle)
 	battle_start()
@@ -253,3 +253,5 @@ func party_won():
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("end_turn"):
 		end_turn()
+	if event.is_action_pressed('restart'):
+		get_tree().change_scene_to_file('res://src/combat_demo.tscn')

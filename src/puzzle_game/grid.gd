@@ -27,6 +27,7 @@ var puzzle_points = {}
 var checked_pieces:Array[Piece] = []
 
 signal cleared_lines(puzzle_point_dict)
+signal topped_out
 
 func _ready() -> void:
 	pieceFactory = get_parent().get_node("PieceFactory")
@@ -94,10 +95,12 @@ func add_rows(new_rows:int):
 	#check that there is space on that row (keep a 1d array with the higest not empty piece on each column)
 		for col in width:
 			var currRow = 0
+
 			while !grid_array[col][currRow].empty:
 				currRow += 1
-				#if currRow == height:  # if you topped out leave function
-					#topout()
+				if currRow == height:  # if you topped out leave function
+					topout()
+					return
 					#return
 			#if currRow < height:
 			#move every other piece on row up by one
@@ -126,12 +129,11 @@ func add_rows_with_actions(new_rows:int,actions:Array[Action]):
 	for x in range(new_rows):
 		for col in width:
 			var currRow = 0
-
 			while !grid_array[col][currRow].empty:
 				currRow += 1
-				#if currRow == height:  # if you topped out leave function
-					#topout()
-					#return
+				if currRow == height:  # if you topped out leave function
+					topout()
+					return
 			#if currRow < height:
 			#move every other piece on row up by one
 
@@ -201,6 +203,7 @@ func drop_piece(col:int,dropRow:int,emptyRow:int):
 
 
 func topout():
+	topped_out.emit()
 	print("you should be dead! now!")
 
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://c8bf2mxegckmt"]
 
 [ext_resource type="Script" path="res://src/combat_manager.gd" id="1_fjji6"]
-[ext_resource type="Texture2D" uid="uid://bff7ps3xu3ptc" path="res://assets/bg8.png" id="1_uvxn2"]
+[ext_resource type="Texture2D" uid="uid://bqea1t7dreb25" path="res://assets/bg5.png" id="1_p1xa0"]
 [ext_resource type="Script" path="res://src/battlers/battler.gd" id="2_04bfm"]
 [ext_resource type="Resource" uid="uid://ux22e0dyh3of" path="res://src/resources/attack_actions/default_attack.tres" id="4_ow76w"]
 [ext_resource type="Resource" uid="uid://uioustulufim" path="res://src/resources/battler_stats/p1.tres" id="4_useah"]
@@ -31,7 +31,7 @@ offset_right = 679.0
 offset_bottom = 379.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_uvxn2")
+texture = ExtResource("1_p1xa0")
 stretch_mode = 1
 
 [node name="CombatManager" type="Node2D" parent="."]
@@ -149,6 +149,7 @@ text = "YE:0"
 horizontal_alignment = 1
 
 [node name="Screenwipe" type="TextureRect" parent="."]
+visible = false
 self_modulate = Color(0.00392157, 0.00392157, 0.00392157, 0.4)
 offset_right = 665.0
 offset_bottom = 365.0

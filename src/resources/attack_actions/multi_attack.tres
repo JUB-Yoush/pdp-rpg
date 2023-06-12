@@ -5,14 +5,14 @@
 
 [resource]
 script = ExtResource("1_34kxq")
-damage_multiplier = 10.0
+damage_multiplier = 1.0
 hit_chance = 100.0
 icon = ExtResource("1_vohxx")
 label = "multi attack"
 description = "12 RED: attack all enemies"
 element = 0
 color_cost = {
-0: 1,
+0: 12,
 1: 0
 }
 countdown_time = 2

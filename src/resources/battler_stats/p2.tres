@@ -1,13 +1,13 @@
 [gd_resource type="Resource" script_class="BattlerStats" load_steps=3 format=3 uid="uid://bpdcdfeviufcv"]
 
-[ext_resource type="Texture2D" uid="uid://dw0pfdyi6fg8o" path="res://assets/battlers/base_battle_portrait.png" id="1_dh6pd"]
 [ext_resource type="Script" path="res://src/battlers/battler_stats.gd" id="1_ltwnm"]
+[ext_resource type="Texture2D" uid="uid://bsqxukpyywndo" path="res://assets/battlers/sqi.png" id="1_u3tdw"]
 
 [resource]
 script = ExtResource("1_ltwnm")
 max_health = 8
 name = "Scribe"
-portrait = ExtResource("1_dh6pd")
+portrait = ExtResource("1_u3tdw")
 weaknesses = []
 affinity = 0
 base_attack = 5

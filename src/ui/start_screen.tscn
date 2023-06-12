@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://cr0bqes51gn4d"]
+
+[ext_resource type="Script" path="res://src/ui/start_screen.gd" id="1_r47k7"]
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r47k7")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 139.0
+offset_top = 106.0
+offset_right = 554.0
+offset_bottom = 262.0
+text = "Puzzle rpg 
+proto-proof of early alpha concept
+made by yoush 
+MONTH LATE yudum 3 submission
+ahhhhhhhhhhhhhhhh
+read the readme or the itch page to know how to play
+press r to start"
