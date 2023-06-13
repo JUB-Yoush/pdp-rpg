@@ -6,7 +6,7 @@ class_name AttackAction
 
 # We calculate and store hits in an array to consume later, in sync with the
 # animation.
-var _hits :Array[Hit]= []
+var _hits :Array[Hit]= [] #for multi-hit moves ig
 
 # We must override the constructor to use it.
 # Notice how _init() uses a unique notation to call the parent's constructor.

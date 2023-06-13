@@ -13,7 +13,7 @@ func _init(data:ActionData,actor:Battler,targets:Array[Battler]) -> void:
 	_data = data
 	_actor = actor
 	_targets = targets
-
+	# dosen't actually do anything
 	if _data.color_cost[Types.ColorCost.RE] > 0:
 		_data.color_used = Types.ColorCost.RE
 	elif _data.color_cost[Types.ColorCost.GR] > 0:

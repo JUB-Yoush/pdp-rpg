@@ -1,4 +1,5 @@
 extends Piece
+#stores enemy action inside it and put's it in the grid
 class_name ActionPiece
 var countdown_time:int
 var action:Action

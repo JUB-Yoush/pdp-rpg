@@ -65,10 +65,16 @@ kinds of pieces:
 - don't even THINK about dungeon crawling until this is done >:(
 
 post mvp:
+
 - fix and comment the codebase so you don't lose your mind coming back to it in 2 months.
-- add magic attack and magic def?
+- fix coupling
+- delay puzzle timeout until after all pieces have combo'ed out
 - fix things that could be static classes/objects instead of nodes
 - fix modifers checking based on strings instead of an enum
+- redo entire ui system
+
+- stat changes decrease by 1 point every turn
+- add magic attack and magic def?
 - recognize combos (also maybe chains??)
 - real enemy ai
 - dungeon crawling

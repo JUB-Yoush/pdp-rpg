@@ -33,8 +33,6 @@ func _ready() -> void:
 	pieceFactory = get_parent().get_node("PieceFactory")
 	x_start = get_viewport_rect().size.x/2 - (offset * width/2)
 	y_start = offset * (height + 2) 
-	#seed(4)
-	#randomize()
 	destroyTimer = get_parent().get_node("DestoryTimer")
 	collapseTimer = get_parent().get_node("CollapseTimer")
 
@@ -204,7 +202,6 @@ func drop_piece(col:int,dropRow:int,emptyRow:int):
 
 func topout():
 	topped_out.emit()
-	print("you should be dead! now!")
 
 
 func find_matches():
@@ -279,6 +276,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("row_add"):
 		add_rows(1)
 
+# ran after the puzzle phase ends 
 func collect_action_pieces():
 	var action_pieces :Array[ActionPiece]= []
 	for col in width:
@@ -288,6 +286,7 @@ func collect_action_pieces():
 	return action_pieces
 
 
+#collect to send to update puzzle points
 func collect_matches() -> Dictionary:
 	# we can use Vector2is as "tuples" to store (color code,# of pieces matched)
 	checked_pieces = []

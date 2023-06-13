@@ -46,5 +46,5 @@ static func _calculate_weakness_multiplier(action_data, defender) -> float:
 
 
 static func calulate_heal_amount(_data:HealActionData, _actor:Battler, target:Battler) -> float:
-	#heals a percentage of your HP
+	#heals a percentage of your HP, should prob make fixed value
 	return target.stats.max_health * _data.recovery_multiplier

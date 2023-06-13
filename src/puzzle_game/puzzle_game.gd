@@ -26,6 +26,7 @@ func _ready() -> void:
 	puzzleTimer.timeout.connect(puzzle_timer_timeout)
 	grid.cleared_lines.connect(add_puzzle_points)
 
+# resume the puzzle phase
 func start_puzzling(used_action_pieces:Array[ActionPiece]) -> void:
 	is_puzzling = true
 	# if there's at least one action used last turn
@@ -47,6 +48,7 @@ func puzzle_timer_timeout():
 	var ready_action_pieces = tick_action_pieces()
 	done_puzzling.emit(puzzle_points,ready_action_pieces)
 
+
 func tick_action_pieces() -> Array[ActionPiece]: 
 	var action_pieces:Array[ActionPiece] = grid.collect_action_pieces()
 	var ready_action_pieces :Array[ActionPiece]= []
@@ -57,6 +59,7 @@ func tick_action_pieces() -> Array[ActionPiece]:
 			grid.action_countdown_finished(actionPiece)
 	return ready_action_pieces
 
+# add from most recently cleared pieces
 func add_puzzle_points(added_puzzle_points:Dictionary):
 	var extra_time :=0.0
 	if added_puzzle_points.values() == [0,0,0,0,0]:
