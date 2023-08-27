@@ -2,8 +2,8 @@ extends Node2D
 class_name PieceFactory
 #you makea all da pieces and give them to the grid
 
-var PieceScene = preload("res://src/puzzle_game/piece.tscn")
-var ActionPieceScene = preload("res://src/puzzle_game/action_piece.tscn")
+const PieceScene = preload("res://src/puzzle_game/piece.tscn")
+const ActionPieceScene = preload("res://src/puzzle_game/action_piece.tscn")
 enum TYPE {RE,BL,GR,YE,PR,EM}
 var colour_count := TYPE.values().size() -1
 

@@ -1,76 +1,10 @@
-how does one make a panel de pon (at least the mechanics needed for my game)
-- ~~generating 2d array of piece scenes~~
-- 
-- ~~generating without existing matches ~~
-- ~~moving cursor around~~
-- ~~swaping blocks at cursor (make sure blocks can swap with nothing and if nothing is under them post swap then they fall)~~
-- ~~check for clear (3 row or col)~~
-- ~~remove cleared blocks, move others down~~
-- ~~move other blocks down~~
-
-### now what:
-- ~~design the different kinds of blocks there will be/whole battle system (PUSH AND PULL JAYDEN)~~
-- ~~work on spawning different kinds of blocks and from the bottom~~ 
-
-~~what's left of the puzzle systems:~~
-~~- design a combo system (pieces in a combo are worth thier combo amount + 1)~~
-~~- fix score allocation (1 point per piece, any pieces above 3 are worth 2 each)~~
-~~- let the player spend 5 seconds to spawn in an extra row?~~
-
-
-~~- make more than just attackActions (figure out how to differetntiate them)~~
-	~~- buff actions~~
-	~~- debuff actions~~
-	~~- heal actions~~
-~~- add stat modifing actions (figure out a turn time limit system)~~
-
-~~- make all actions have a red and green cost~~
-~~- get skill cost working (feed puzzle points through the battlers?)~~
-~~- add battler boxes for each battler in the fight~~
-~~- work on async selection function~~
-~~- add Ui for users to select their actions and targets~~
-~~- add a fake all selection for selecting every target (highlight everyone when await a confirm input event)~~
-
-- display values on the ui nodes
-- check if selecting all battlers with a selecting everyone bool
-- display a button of the currently chosen action after choice is made
-- deconfirm target selection and go back to action selection
-- fix that typing error I'm getting
-- add bad Ai for enemies to select actions (weighted randomization)
-- ko/negative hp state for pm
-- then it's time to make content????
-
-- heal party in between fights
-- create content
-- radomization
-- done mvp!!!
-
-the battle system:
-kinds of pieces:
-- generic skill/action points
-- attacking skills
-- red: power points, gives you points to do active skills with 
-- green: tech points, gives you points to do passive skills with 
-- blue: defence, feeds into a slay the spire style defence pool that tanks damage before it reaches your HP
-- yellow: gives time back
-- purple: enemy attacks, countdown style (seperate from other styles of blocks), once it hits 0 an enemy acts
-- garbage: pdp style garbage logs that spawn in from the top (not nessicary ig?)
-- topping out is a insta die
-- you're given a timer of 10 seconds to clear as many blocks as possible
-- clears of more than 3 at a time and chains give extra time +2 for every additional block
-- after that you get to act on your turn (spend the pp and tp to beat up the enemies lol) 
-- enemies then add more blocks to the grid and the timer restarts
-- pokemon style effectiveness types? and extra effective moves provide a bonus on the next puzzle round
-- alternate between puzzle rounds and spending rounds until enemies die or you die
-- don't even THINK about dungeon crawling until this is done >:(
-
 post mvp:
 
 - fix and comment the codebase so you don't lose your mind coming back to it in 2 months.
 - fix coupling
 - delay puzzle timeout until after all pieces have combo'ed out
 - fix things that could be static classes/objects instead of nodes
-- fix modifers checking based on strings instead of an enum
+- fix modifiers checking based on strings instead of an enum
 - redo entire ui system
 
 - stat changes decrease by 1 point every turn
@@ -84,3 +18,39 @@ post mvp:
 - multi action attacks (attacking + status + heal)
 - crits and weak hits give you more puzzle time
 - recruiting by clearing some sort of preset puzzle?
+
+fixes:
+
+general:
+- optimize functions and scene trees. most nodes can be instanced within the parent 
+- start with the battle/puzzle changes. the ui is kinda seperate and can be touched later on.
+
+puzzle:
+- fix match detection to recognize combos 
+- lockout adding rows and ending phase while pieces are still falling
+- time doesn't countdown during a combo?
+- make a line that points a action piece to it's owner for the ui
+- GARBAGE BLOCKS:
+  - garbage is spawned in when you don't have enough blue points to tank a hit
+
+ui:
+- real earthbound backgrounds w shaders
+- just redo all of the code for the battleboxes and selection, piggybacking on existing Godot functions might b making things more complicated then they have to be
+- change blue placement to be not next to the other two 
+
+battle:
+- smart enemy ai
+- balance buffs/nerfs (think of somthing)
+- lucky crits and targeting weaknesses give you more puzzle time
+- garbage blocks only spawn when not enough blue to defend from damage
+- multi action attacks (attacking + status + heal)
+- blue moves!?
+- lose half your blue points at the end of a turn. can't just stock up
+
+new features:
+- smt dungeon crawling
+- leveling up
+- items
+- status effects
+- recruiting by clearing a generated pdp puzzle
+
