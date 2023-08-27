@@ -12,7 +12,7 @@ config_version=5
 
 config/name="pdp-rpg"
 run/main_scene="res://src/ui/start_screen.tscn"
-config/features=PackedStringArray("4.0", "Mobile")
+config/features=PackedStringArray("4.1", "Mobile")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://icon.svg"
 
@@ -117,5 +117,5 @@ restart={
 
 [rendering]
 
-renderer/rendering_method="mobile"
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="mobile"
