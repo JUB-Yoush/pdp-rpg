@@ -30,7 +30,7 @@ signal cleared_lines(puzzle_point_dict)
 signal topped_out
 
 func _ready() -> void:
-	pieceFactory = get_parent().get_node("PieceFactory")
+	pieceFactory = PieceFactory.new()
 	x_start = get_viewport_rect().size.x/2 - (offset * width/2)
 	y_start = offset * (height + 2) 
 	destroyTimer = get_parent().get_node("DestoryTimer")

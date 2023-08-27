@@ -167,7 +167,6 @@ func start_turn(enemy_action_pieces):
 	check_for_winner()
 	await start_enemy_turn(enemy_action_pieces)
 	start_party_turn()
-	pass
 
 func check_for_winner():
 	var out_battlers = 0
@@ -176,7 +175,6 @@ func check_for_winner():
 			out_battlers += 1
 	if out_battlers == _party_members.size():
 		party_lost()
-		pass
 
 	out_battlers = 0
 	for battler in _opponents:
@@ -184,7 +182,6 @@ func check_for_winner():
 			out_battlers += 1
 	if out_battlers == _opponents.size():
 		party_won()
-		pass
 
 func give_shield_points():
 	for battler in _party_members:
@@ -198,9 +195,7 @@ func start_party_turn():
 		await battler.turn_passed
 		if UI.get_node("UIActionMenu") != null:
 			UI.remove_child(UI.get_node("UIActionMenu"))
-			pass
 	end_turn()
-	pass
 
 func _player_select_action_async(battler) -> ActionData:
 	var actionMenu:UIActionMenu = UIActionMenuScene.instantiate()
@@ -244,11 +239,9 @@ func _all_target_selection(targetBoxes:UIBattlerBoxMenu):
 
 func party_lost():
 	screenwipe.activate("party lost! \n press R to restart \n thanks for playing")
-	pass
 
 func party_won():
 	screenwipe.activate("party won! \n press R to restart \n thanks for playing")
-	pass
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("end_turn"):

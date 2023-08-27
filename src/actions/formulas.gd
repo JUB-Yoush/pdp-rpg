@@ -1,18 +1,21 @@
 class_name Formulas
 
+
 # Returns the product of the attacker's attack and the action's multiplier.
 static func calculate_potential_damage(action_data, attacker) -> float:
 	return attacker.stats.attack * action_data.damage_multiplier
+
 
 # The base damage is "attacker.attack * action.multiplier - defender.defence".
 # The function multiplies it by a weakness multiplier, calculated by
 # `_calculate_weakness_multiplier` below. Finally, we ensure the value is an
 # integer in the [1, 999] range.
-static func calulate_base_damage(action_data,attacker,defender) ->int:
+static func calulate_base_damage(action_data, attacker, defender) -> int:
 	var damage: float = calculate_potential_damage(action_data, attacker)
 	damage -= defender.stats.defence
 	damage *= _calculate_weakness_multiplier(action_data, defender)
 	return int(clamp(damage, 1.0, 999.0))
+
 
 static func calculate_hit_chance(action_data, attacker, defender) -> float:
 	var chance: float = attacker.stats.hit_chance - defender.stats.evasion
@@ -45,6 +48,6 @@ static func _calculate_weakness_multiplier(action_data, defender) -> float:
 	return multiplier
 
 
-static func calulate_heal_amount(_data:HealActionData, _actor:Battler, target:Battler) -> float:
+static func calulate_heal_amount(_data: HealActionData, _actor: Battler, target: Battler) -> float:
 	#heals a percentage of your HP, should prob make fixed value
 	return target.stats.max_health * _data.recovery_multiplier

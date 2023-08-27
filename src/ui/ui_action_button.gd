@@ -12,6 +12,7 @@ var icon_texture :Texture
 
 @onready var _icon_node:TextureRect = $HBoxContainer/Icon
 @onready var _label_node:Label = $HBoxContainer/Label
+
 var description:String
 
 func setup(action:ActionData,can_be_used:bool) -> void:

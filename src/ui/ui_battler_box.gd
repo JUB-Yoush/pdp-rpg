@@ -2,25 +2,25 @@ extends TextureButton
 class_name UIBattlerBox
 
 #bad code but
-var battler:Battler
+var battler: Battler
 
-const focused_color := 'ffffeb'
-const unfocused_color := 'c2c2d1'
-const disabled_color := '43434f'
+const focused_color := "ffffeb"
+const unfocused_color := "c2c2d1"
+const disabled_color := "43434f"
 
-const focused_border := 'res://assets/ui/battlebox/battlebox-focused.png'
-const unfocused_border := 'res://assets/ui/battlebox/battlebox-unfocused.png'
-const disabled_border := 'res://assets/ui/battlebox/battlebox-disabled.png'
-
+const focused_border := "res://assets/ui/battlebox/battlebox-focused.png"
+const unfocused_border := "res://assets/ui/battlebox/battlebox-unfocused.png"
+const disabled_border := "res://assets/ui/battlebox/battlebox-disabled.png"
 
 @onready var nameLabel := $VBoxContainer/NameLabel
 @onready var portrait := $VBoxContainer/Portrait
 @onready var hpLabel := $VBoxContainer/HPLabel
 
 # setget this mf
-var max_hp:int
+var max_hp: int
 
-func setup(battlerNode:Battler):
+
+func setup(battlerNode: Battler):
 	battler = battlerNode
 	battler.stats.health_depleted.connect(battler_hp_depleted)
 	if not is_inside_tree():
@@ -35,19 +35,20 @@ func setup(battlerNode:Battler):
 
 
 func update_hp_label(new_hp):
-	hpLabel.text = str(new_hp)+ "/"+str(max_hp)
+	hpLabel.text = str(new_hp) + "/" + str(max_hp)
+
 
 func display_focus():
 	if disabled == false:
 		nameLabel.modulate = focused_color
 		hpLabel.modulate = focused_color
-		
 
 
 func display_unfocus():
 	if disabled == false:
 		nameLabel.modulate = unfocused_color
 		hpLabel.modulate = unfocused_color
+
 
 func battler_hp_depleted():
 	disabled = true

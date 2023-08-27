@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnr8ns7dtkp5w"]
+[gd_scene load_steps=7 format=3 uid="uid://dnr8ns7dtkp5w"]
 
 [ext_resource type="Script" path="res://src/puzzle_game/puzzle_game.gd" id="1_uicm7"]
 [ext_resource type="Script" path="res://src/puzzle_game/grid.gd" id="2_hvm35"]
 [ext_resource type="PackedScene" uid="uid://b1j26omn5kpo3" path="res://src/puzzle_game/cursor.tscn" id="3_kbrgb"]
-[ext_resource type="Script" path="res://src/puzzle_game/piece_factory.gd" id="4_5jc7a"]
 [ext_resource type="Script" path="res://src/puzzle_game/puzzle_timer.gd" id="5_53jne"]
 [ext_resource type="FontFile" uid="uid://t0ckvlv6kh50" path="res://assets/fonts/Awe Mono Gold.ttf" id="6_hwwuu"]
 
@@ -20,9 +19,6 @@ script = ExtResource("2_hvm35")
 starting_row_count = 3
 
 [node name="Cursor" parent="." instance=ExtResource("3_kbrgb")]
-
-[node name="PieceFactory" type="Node2D" parent="."]
-script = ExtResource("4_5jc7a")
 
 [node name="DestoryTimer" type="Timer" parent="."]
 wait_time = 0.3
